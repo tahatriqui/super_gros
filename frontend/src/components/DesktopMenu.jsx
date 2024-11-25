@@ -1,86 +1,156 @@
 import { useState } from "react";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 export default function DesktopMenu({ menu }) {
-  const [isHover, toggleHover] = useState(false);
-  const toggleHoverMenu = () => {
-    toggleHover(!isHover);
-  };
+  const [isHover, setIsHover] = useState(false); // For the main menu hover
+  const [activeSubMenu, setActiveSubMenu] = useState(null); // For nested submenus
+  const [activeNestedSubMenu, setActiveNestedSubMenu] = useState(null); // For third-level submenus
 
   const subMenuAnimate = {
     enter: {
       opacity: 1,
-      rotateX: 0,
-      transition: {
-        duration: 0.5,
-      },
+      translateY: 0,
       display: "block",
+      transition: { duration: 0.3 },
     },
     exit: {
       opacity: 0,
-      rotateX: -15,
-      transition: {
-        duration: 0.5,
-      },
-      transitionEnd: {
-        display: "none",
-      },
+      translateY: -10,
+      transition: { duration: 0.3 },
+      transitionEnd: { display: "none" },
     },
   };
 
-  const hasSubMenu = menu?.subMenu?.length;
+  const handleSubMenuHover = (submenuName) => {
+    setActiveSubMenu(submenuName);
+  };
+
+  const handleNestedSubMenuHover = (nestedSubMenuName) => {
+    setActiveNestedSubMenu(nestedSubMenuName);
+  };
+
+  const hasSubMenu = menu?.subMenu?.length > 0;
 
   return (
     <motion.li
-      className="group/link"
-      onHoverStart={() => {
-        toggleHoverMenu();
+      className="relative group/link"
+      onMouseEnter={() => setIsHover(true)}
+      onMouseLeave={() => {
+        setIsHover(false);
+        setActiveSubMenu(null);
+        setActiveNestedSubMenu(null);
       }}
-      onHoverEnd={toggleHoverMenu}
       key={menu.name}
     >
-      <span className="flex-center gap-1 hover:bg-white/5 cursor-pointer px-3 py-1 rounded-xl">
+      {/* Main Menu Item */}
+      <span className="flex items-center gap-2 px-4 py-2 rounded-lg cursor-pointer hover:bg-gray-200">
         {menu.name}
-        {hasSubMenu && (
-          <ChevronDown className="mt-[0.6px] group-hover/link:rotate-180 duration-200" />
-        )}
+        {hasSubMenu && <ChevronDown />}
       </span>
+
+      {/* First-Level Dropdown */}
       {hasSubMenu && (
         <motion.div
-          className="sub-menu"
+          className="absolute left-0 z-10 p-4 mt-2 bg-white rounded-lg shadow-lg w-max"
           initial="exit"
           animate={isHover ? "enter" : "exit"}
           variants={subMenuAnimate}
         >
-          <div
-            className={`grid gap-7 ${
-              menu.gridCols === 3
-                ? "grid-cols-3"
-                : menu.gridCols === 2
-                ? "grid-cols-2"
-                : "grid-cols-1"
-            }`}
-          >
-            {hasSubMenu &&
-              menu.subMenu.map((submenu, i) => (
-                <div className="relative cursor-pointer" key={i}>
-                  {menu.gridCols > 1 && menu?.subMenuHeading?.[i] && (
-                    <p className="text-sm mb-4 text-gray-500">
-                      {menu?.subMenuHeading?.[i]}
-                    </p>
-                  )}
-                  <div className="flex-center gap-x-4 group/menubox">
-                    <div className="bg-white/5 w-fit p-2 rounded-md group-hover/menubox:bg-white group-hover/menubox:text-gray-900 duration-300">
-                      {submenu.icon && <submenu.icon />}
-                    </div>
-                    <div>
+          <div className="grid gap-4">
+            {menu.subMenu.map((submenu, i) => {
+              const hasNestedSubMenu = submenu.subMenu?.length > 0;
+
+              return (
+                <div
+                  key={i}
+                  className="relative group/menubox"
+                  onMouseEnter={() => handleSubMenuHover(submenu.name)}
+                  onMouseLeave={() => setActiveSubMenu(null)}
+                >
+                  {/* Submenu Item */}
+                  <div className="flex items-center justify-between gap-4 px-2 py-1 rounded-md cursor-pointer hover:bg-gray-100">
+                    <Link to={submenu.link || "#"}>
                       <h6 className="font-semibold">{submenu.name}</h6>
-                      <p className="text-sm text-gray-400">{submenu.desc}</p>
-                    </div>
+                    </Link>
+                    {hasNestedSubMenu && <ChevronRight />}
                   </div>
+
+                  {/* Nested Dropdown (Second-Level Dropdown) */}
+                  {hasNestedSubMenu && (
+                    <motion.div
+                      className="absolute top-0 z-20 p-4 mt-0 ml-2 bg-white rounded-lg shadow-lg left-full w-max"
+                      initial="exit"
+                      animate={activeSubMenu === submenu.name ? "enter" : "exit"}
+                      variants={subMenuAnimate}
+                    >
+                      <div className="grid gap-4">
+                        {submenu.subMenu.map((nestedItem, j) => {
+                          const hasThirdLevelSubMenu = nestedItem.subMenu?.length > 0;
+
+                          return (
+                            <div
+                              key={j}
+                              className="relative"
+                              onMouseEnter={() =>
+                                handleNestedSubMenuHover(nestedItem.name)
+                              }
+                              onMouseLeave={() => setActiveNestedSubMenu(null)}
+                            >
+                              <div className="flex items-center justify-between gap-4 px-2 py-1 rounded-md cursor-pointer hover:bg-gray-100">
+                                <Link to={nestedItem.link || "#"}>
+                                  <h6 className="font-medium">{nestedItem.name}</h6>
+                                  {nestedItem.desc && (
+                                    <p className="text-sm text-gray-400">
+                                      {nestedItem.desc}
+                                    </p>
+                                  )}
+                                </Link>
+                                {hasThirdLevelSubMenu && <ChevronRight />}
+                              </div>
+
+                              {/* Third-Level Dropdown */}
+                              {hasThirdLevelSubMenu && (
+                                <motion.div
+                                  className="absolute top-0 z-30 p-4 mt-0 ml-2 bg-white rounded-lg shadow-lg left-full w-max"
+                                  initial="exit"
+                                  animate={
+                                    activeNestedSubMenu === nestedItem.name
+                                      ? "enter"
+                                      : "exit"
+                                  }
+                                  variants={subMenuAnimate}
+                                >
+                                  <div className="grid gap-4">
+                                    {nestedItem.subMenu.map((thirdLevelItem, k) => (
+                                      <Link
+                                        to={thirdLevelItem.link || "#"}
+                                        key={k}
+                                        className="block px-2 py-1 rounded-md hover:bg-gray-100"
+                                      >
+                                        <h6 className="font-medium">
+                                          {thirdLevelItem.name}
+                                        </h6>
+                                        {thirdLevelItem.desc && (
+                                          <p className="text-sm text-gray-400">
+                                            {thirdLevelItem.desc}
+                                          </p>
+                                        )}
+                                      </Link>
+                                    ))}
+                                  </div>
+                                </motion.div>
+                              )}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </motion.div>
+                  )}
                 </div>
-              ))}
+              );
+            })}
           </div>
         </motion.div>
       )}

@@ -18,10 +18,13 @@ import { Database } from "lucide-react";
 import { PanelsTopLeft } from "lucide-react";
 import { PanelTop } from "lucide-react";
 
+
+
+
 export const Menus = [
   {
-    name: "Features",
-    subMenuHeading: ["Design", "Scale"],
+    name: "Les categories",
+    subMenuHeading: ["Design"],
     subMenu: [
       {
         name: "Design",

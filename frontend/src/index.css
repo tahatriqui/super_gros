@@ -5,7 +5,8 @@
 @tailwind utilities;
 
 body {
-  @apply bg-[#111] text-gray-300 font-inter;
+  
+  
 }
 
 @layer components {

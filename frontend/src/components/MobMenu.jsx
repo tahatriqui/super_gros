@@ -28,7 +28,7 @@ export default function MobMenu({ Menus }) {
       </button>
 
       <motion.div
-        className="fixed left-0 right-0 top-16 overflow-y-auto h-full bg-[#18181A] backdrop-blur text-white p-6 pb-20"
+        className="fixed left-0 right-0 top-16 overflow-y-auto h-full  bg-[#bab9b9] backdrop-blur text-white p-6 pb-20"
         initial={{ x: "-100%" }}
         animate={{ x: isOpen ? "0%" : "-100%" }}
       >
@@ -39,7 +39,7 @@ export default function MobMenu({ Menus }) {
             return (
               <li key={name} className="">
                 <span
-                  className="flex-center-between p-4 hover:bg-white/5 rounded-md cursor-pointer relative"
+                  className="relative p-4 rounded-md cursor-pointer flex-center-between hover:bg-white/5"
                   onClick={() => setClicked(isClicked ? null : i)}
                 >
                   {name}
@@ -59,7 +59,7 @@ export default function MobMenu({ Menus }) {
                     {subMenu.map(({ name, icon: Icon }) => (
                       <li
                         key={name}
-                        className="p-2 flex-center hover:bg-white/5 rounded-md gap-x-2 cursor-pointer"
+                        className="p-2 rounded-md cursor-pointer flex-center hover:bg-white/5 gap-x-2"
                       >
                         <Icon size={17} />
                         {name}
