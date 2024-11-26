@@ -1,0 +1,273 @@
+/* Global Layout */
+.product-page {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  margin-top:70px;
+}
+
+/* Image Section */
+.product-image-section {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-slider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.product-image {
+  max-width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.slider-arrow {
+  background-color: #ddd;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 50%;
+}
+
+.slider-arrow:hover {
+  background-color: #bbb;
+}
+
+/* Details Section */
+.product-details-section {
+  flex: 2;
+}
+
+.breadcrumb {
+  font-size: 14px;
+  margin-bottom: 10px;
+  color: #888;
+}
+
+.breadcrumb a {
+  text-decoration: none;
+  color: #555;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.price {
+  font-size: 20px;
+  color: #000;
+  margin-bottom: 10px;
+}
+
+.rating {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+.description {
+  margin-bottom: 15px;
+}
+
+ul {
+  margin-bottom: 15px;
+  list-style: disc;
+  padding-left: 20px;
+}
+
+/* Variant and Quantity */
+.variant-selector,
+.quantity-selector {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+select,
+input {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Buttons */
+.buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+align-items: left; /* Centrer les boutons */
+}
+
+.add-to-cart,
+.buy-now {
+  padding: 10px; /* Réduction de la hauteur */
+  font-size: 14px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100px; /* Ajuste automatiquement selon le contenu */
+  max-width: 350px; /* Limite la longueur maximale */
+  text-align: center; /* Centrer le texte dans les boutons */
+}
+
+.add-to-cart {
+  background-color: red;
+  color: white;
+  box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.1);
+}
+
+.buy-now {
+  background-color: black;
+  color: white;
+  box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.1);
+}
+
+.add-to-cart:hover {
+  background-color: black;
+  transform: translateY(-1px);
+}
+
+.buy-now:hover {
+  background-color: red;
+  transform: translateY(-1px);
+}
+
+
+/* Shipping Info */
+.shipping-info {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+/* Tabs */
+.tabs {
+  margin-top: 20px;
+}
+
+.tab {
+  margin-bottom: 20px;
+}
+
+.tab h3 {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.tab p {
+  font-size: 14px;
+  color: #555;
+}
+/* Mode Téléphone */
+@media (max-width: 768px) {
+  .product-page {
+    flex-direction: column; /* Empile les sections verticalement */
+    padding: 10px;
+  }
+
+  .product-image-section {
+    margin-bottom: 20px; /* Ajoute un espacement entre les sections */
+    text-align: center; /* Centrer l'image */
+  }
+
+  .image-slider {
+    gap: 5px;
+  }
+
+  .product-image {
+    max-width: 100%; /* L'image prend toute la largeur de l'écran */
+    height: auto;
+  }
+
+  .slider-arrow {
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  .product-details-section {
+    padding: 0;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+
+  .price {
+    font-size: 18px;
+  }
+
+  .rating {
+    font-size: 14px;
+  }
+
+  .description {
+    font-size: 14px;
+  }
+
+  .variant-selector,
+  .quantity-selector {
+    margin-bottom: 10px;
+  }
+
+  select,
+  input {
+    font-size: 14px;
+    padding: 6px;
+  }
+
+  .buttons {
+    flex-direction: column; /* Empile les boutons */
+    gap: 8px;
+    align-items: center; /* Centrer les boutons */
+  }
+
+  .add-to-cart,
+  .buy-now {
+    width: 100px; /* Ajuste automatiquement selon le contenu */
+    max-width: 150px; /* Limite également la longueur sur mobile */
+    padding: 10px;
+    font-size: 14px;
+    text-align: left;
+  }
+
+  .add-to-cart:hover,
+  .buy-now:hover {
+    transform: none; /* Pas de mouvement au hover sur téléphone */
+  }
+
+  .shipping-info {
+    font-size: 12px;
+  }
+
+  .tabs {
+    margin-top: 10px;
+  }
+
+  .tab h3 {
+    font-size: 16px;
+  }
+
+  .tab p {
+    font-size: 13px;
+  }
+}

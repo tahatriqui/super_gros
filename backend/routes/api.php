@@ -23,3 +23,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get("/cat",[CategoryController::class,"index"]);
 Route::get("/scat",[CategoryController::class,"scat"]);
 Route::get("/sscat",[CategoryController::class,"sscat"]);
+Route::get("/ssscat/{id}",[CategoryController::class,"ssscat"]);

@@ -2,12 +2,14 @@ import { useState } from "react";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { useAppContext } from "../AppContext.jsx";
 
 export default function DesktopMenu({ menu }) {
-  const [isHover, setIsHover] = useState(false); // For the main menu hover
-  const [activeSubMenu, setActiveSubMenu] = useState(null); // For nested submenus
-  const [activeNestedSubMenu, setActiveNestedSubMenu] = useState(null); // For third-level submenus
-
+  const [isHover, setIsHover] = useState(false); 
+  const [activeSubMenu, setActiveSubMenu] = useState(null); 
+  const [activeNestedSubMenu, setActiveNestedSubMenu] = useState(null); 
+  const { ssid,setSsid, setSsCat, sscat } = useAppContext();
+  
   const subMenuAnimate = {
     enter: {
       opacity: 1,
@@ -45,10 +47,10 @@ export default function DesktopMenu({ menu }) {
       key={menu.name}
     >
       {/* Main Menu Item */}
-      <span className="flex items-center gap-2 px-4 py-2 rounded-lg cursor-pointer hover:bg-gray-200">
+      <Link to={menu.link} className="flex items-center gap-2 px-4 py-2 rounded-lg cursor-pointer hover:bg-gray-200">
         {menu.name}
         {hasSubMenu && <ChevronDown />}
-      </span>
+      </Link>
 
       {/* First-Level Dropdown */}
       {hasSubMenu && (
@@ -85,7 +87,7 @@ export default function DesktopMenu({ menu }) {
                       animate={activeSubMenu === submenu.name ? "enter" : "exit"}
                       variants={subMenuAnimate}
                     >
-                      <div className="grid gap-4">
+                      <div className="grid gap-4" style={{ zIndex:'1000' }}>
                         {submenu.subMenu.map((nestedItem, j) => {
                           const hasThirdLevelSubMenu = nestedItem.subMenu?.length > 0;
 
@@ -93,9 +95,7 @@ export default function DesktopMenu({ menu }) {
                             <div
                               key={j}
                               className="relative"
-                              onMouseEnter={() =>
-                                handleNestedSubMenuHover(nestedItem.name)
-                              }
+                              onMouseEnter={() => handleNestedSubMenuHover(nestedItem.name)}
                               onMouseLeave={() => setActiveNestedSubMenu(null)}
                             >
                               <div className="flex items-center justify-between gap-4 px-2 py-1 rounded-md cursor-pointer hover:bg-gray-100">
@@ -115,28 +115,20 @@ export default function DesktopMenu({ menu }) {
                                 <motion.div
                                   className="absolute top-0 z-30 p-4 mt-0 ml-2 bg-white rounded-lg shadow-lg left-full w-max"
                                   initial="exit"
-                                  animate={
-                                    activeNestedSubMenu === nestedItem.name
-                                      ? "enter"
-                                      : "exit"
-                                  }
+                                  animate={activeNestedSubMenu === nestedItem.name ? "enter" : "exit"}
                                   variants={subMenuAnimate}
                                 >
-                                  <div className="grid gap-4">
+                                  <div className="grid gap-4" style={{ zIndex:'1000' }}>
                                     {nestedItem.subMenu.map((thirdLevelItem, k) => (
-                                      <Link
-                                        to={thirdLevelItem.link || "#"}
+                                      <Link 
+                                       onClick={() => setSsid(prevSsid => thirdLevelItem.id)}
+                                        to={ thirdLevelItem.link }  // Ensure proper routing based on sscat
                                         key={k}
                                         className="block px-2 py-1 rounded-md hover:bg-gray-100"
                                       >
                                         <h6 className="font-medium">
                                           {thirdLevelItem.name}
                                         </h6>
-                                        {thirdLevelItem.desc && (
-                                          <p className="text-sm text-gray-400">
-                                            {thirdLevelItem.desc}
-                                          </p>
-                                        )}
                                       </Link>
                                     ))}
                                   </div>

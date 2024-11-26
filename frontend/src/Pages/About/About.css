@@ -1,9 +1,12 @@
 /* Style de la section */
+body{
+   background-color: #f9f9f9;
+}
 .about-section {
-  background-color: #fff;
+    background-color: #f9f9f9;
   padding: 50px 20px;
   font-family: Arial, sans-serif;
-   margin-bottom: 50px;
+    margin-top: 40px;
 }
 
 /* Conteneur principal */
@@ -11,12 +14,13 @@
   max-width: 1200px;
   margin: 0 auto;
   text-align: center;
-   padding-bottom: 30px
+  
 }
 
 /* Partie supérieure */
 .about-header {
-  margin-bottom: 40px;
+  margin-bottom: 60px;
+  text-align: center;
 }
 
 .about-quality {
@@ -31,13 +35,14 @@
   font-size: 30px;
   font-weight: bold;
   margin-bottom: 10px;
-  color: #000;
+  color: red;
+ 
 }
 
 .about-subtitle {
   font-size: 18px;
   color: #555;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .about-buttons {
@@ -74,7 +79,7 @@
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 15px;
-  color: #000;
+  color: red;
 }
 
 .about-text {
@@ -83,20 +88,16 @@
   line-height: 1.6;
 }
 
-/* Section Articles */
 .articles-section {
   background-color: #f9f9f9;
-  padding: 50px 20px 80px; /* Augmenter le padding-bottom */
+ 
   text-align: center;
   font-family: Arial, sans-serif;
-  margin-bottom: 50px; /* Ajoute une marge en dessous pour plus d'espacement */
 }
-
 
 .articles-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding-bottom: 30px; /* Un peu d'espace supplémentaire sous les articles */
 }
 
 .articles-header {
@@ -114,7 +115,7 @@
 .articles-title {
   font-size: 28px;
   font-weight: bold;
-  color: #000;
+  color: red;
 }
 
 .articles-subtitle {
@@ -147,7 +148,7 @@
   width: 100%;
   height: 150px;
   border-radius: 4px;
-  margin-bottom: 15px;
+  margin-bottom: 35px;
 }
 
 .article-category {
@@ -203,3 +204,5 @@
   background: #000;
   color: #fff;
 }
+
+

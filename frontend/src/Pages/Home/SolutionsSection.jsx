@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion"; // Importation de Framer Motion
 import "./SolutionsSection.css";
 
 const SolutionsSection = () => {
@@ -13,7 +14,12 @@ const SolutionsSection = () => {
         d'équipements et de services pour garantir votre succès.
       </p>
       <div className="cards-container">
-        <div className="card">
+        <motion.div
+          className="card"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
           <div className="icon">⚙️</div>
           <h3 className="card-title">
             Nos services adaptés à votre secteur d'activité
@@ -22,8 +28,14 @@ const SolutionsSection = () => {
             Nous proposons des solutions sur mesure pour chaque secteur, que ce
             soit le BTP, l'agriculture ou le bâtiment.
           </p>
-        </div>
-        <div className="card">
+        </motion.div>
+
+        <motion.div
+          className="card"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
           <div className="icon">🎯</div>
           <h3 className="card-title">
             Une approche personnalisée pour chaque client
@@ -32,8 +44,14 @@ const SolutionsSection = () => {
             Nous analysons vos besoins pour vous fournir les meilleures options
             disponibles.
           </p>
-        </div>
-        <div className="card">
+        </motion.div>
+
+        <motion.div
+          className="card"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
           <div className="icon">✅</div>
           <h3 className="card-title">
             Engagement envers la qualité et la satisfaction
@@ -42,9 +60,16 @@ const SolutionsSection = () => {
             Votre satisfaction est notre priorité, et nous nous engageons à
             fournir des produits de haute qualité.
           </p>
-        </div>
+        </motion.div>
       </div>
-      <button className="button">En savoir plus</button>
+      <motion.button
+        className="button"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6, delay: 0.6 }}
+      >
+        En savoir plus
+      </motion.button>
     </div>
   );
 };
