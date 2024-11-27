@@ -82,11 +82,13 @@ function Nav() {
                       return {
                         name: el.nom_scat,
                         subMenu: sscategories
+                        
                           .map((ele) => {
                             if (ele.sscat_id === el.id) {
                               return {
                                 name: ele.nom_scat,
                                 id: ele.id,
+                                
                                subMenu: ssscategories
                             .map((elem) => {
                               if (elem.sscat_id === ele.id) {
