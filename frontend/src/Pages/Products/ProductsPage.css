@@ -2,6 +2,7 @@
   text-align: center;
   padding: 50px 20px;
   background-color: #f9f9f9;
+ 
 }
 
 .header h2 {
@@ -70,3 +71,6 @@
   background-color: black;
 }
 
+@media (max-width: 768px) {
+  .products-page { margin-top: 90px;}
+}

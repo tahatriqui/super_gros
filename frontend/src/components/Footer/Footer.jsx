@@ -1,43 +1,82 @@
 import React from "react";
-import "./footer.css";
-// Pour les styles spécifiques au mode téléphone
+import "./Footer.css";
 
-const Footer = () => {
+
+function Footer() {
   return (
-    <footer className="footer">
-      <div className="footer-container">
-        {/* Logo et Newsletter */}
-        <div className="footer-newsletter">
-          <h2 className="footer-logo">Supergros</h2>
-          <p>
-            La qualité est notre promesse aux clients. Afin d'assurer la qualité
-            et la fiabilité de nos produits, nous utilisons les technologies et
-            les équipements de fabrication les plus avancés au monde.
-          </p>
-        </div>
+    <div className="footer">
+      <div className="sb-footer-section-padding">
+        <div className="sb-footer-links">
+          <div className="sb-footer-links-div">
+            <h4>Supergros</h4>
+            <p>
+              La qualité est notre promesse aux clients. Afin d'assurer la
+              qualité et la fiabilité de nos produits, nous utilisons les
+              technologies et les équipements de fabrication les plus avancés au
+              monde.
+            </p>
+          </div>
+          <div className="sb-footer-links-div">
+            <h4>Resources</h4>
+            <a href="">
+              <p>Resources Center</p>
+            </a>
+            <a href="">
+              <p>Testimonials</p>
+            </a>
+            <a href="">
+              <p>STV</p>
+            </a>
+          </div>
+          <div className="sb-footer-links-div">
+            <h4>Partners</h4>
+            <a href="">
+              <p>Minute Magic</p>
+            </a>
+          </div>
+          <div className="sb-footer-links-div">
+            <h4>Contactez-nous</h4>
+            <a
+              href="https://www.google.com/maps?q=223,+Lot.+Ain+Al+Hayat+1/T501,+R%2B2,+Apt.3,+Skhirat"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <p>223, Lot. Ain Al Hayat , 1/T501, R+2, Apt.3 Skhirat</p>
+            </a>
+            <a href="mailto:contact@supergros.ma">
+              <p>contact@supergros.ma</p>
+            </a>
+            <a href="tel:0537586976">
+              <p>0537 58 69 76</p>
+            </a>
+          </div>
 
-        {/* Liens de Navigation */}
-        <div className="footer-links">
-          <div>
-            <h3>Colonne Un</h3>
-            <ul className="footer-list">
-              <li>Lien Un</li>
-              <li>Lien Deux</li>
-              <li>Lien Trois</li>
-              <li>Lien Quatre</li>
-              <li>Lien Cinq</li>
-            </ul>
+          <div className="sb-footer-links-div">
+            <h4>Suivez-nous</h4>
+            <div className="socialmedia">
+              <p></p>
+              <p>
+                
+              </p>
+              <p>
+                <img src="" alt="" />
+              </p>
+              <p>
+                <img src="" alt="" />
+              </p>
+            </div>
           </div>
         </div>
+        <hr></hr>
 
-        
+        <div className="sb-footer-below">
+          <div className="sb-footer-copyright">
+            <p>@Copyright 2024 Supergros.Tous droits réservés.</p>
+          </div>
+        </div>
       </div>
-
-      <div className="footer-bottom">
-        <p>&copy; 2024 Supergros. Tous droits réservés.</p>
-      </div>
-    </footer>
+    </div>
   );
-};
+}
 
 export default Footer;

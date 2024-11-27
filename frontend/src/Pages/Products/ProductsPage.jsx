@@ -19,7 +19,7 @@ const ProductsPage = () => {
           className="card"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 1 }}
         >
           <div className="icon">🚛</div>
           <h3>Véhicules de transport adaptés à vos besoins</h3>
@@ -33,7 +33,7 @@ const ProductsPage = () => {
           className="card"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+          transition={{ duration: 1, delay: 0.2 }}
         >
           <div className="icon">⚙️</div>
           <h3>Équipements spéciaux pour des missions spécifiques</h3>
@@ -47,7 +47,7 @@ const ProductsPage = () => {
           className="card"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
+          transition={{ duration:1, delay: 0.4 }}
         >
           <div className="icon">🔧</div>
           <h3>Pièces de rechange pour tous vos équipements</h3>
@@ -61,7 +61,7 @@ const ProductsPage = () => {
           className="card"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
+          transition={{ duration: 1, delay: 0.6 }}
         >
           <div className="icon">🍞</div>
           <h3>Matériel de boulangerie et restauration professionnel</h3>

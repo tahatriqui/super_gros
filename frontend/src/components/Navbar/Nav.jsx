@@ -11,9 +11,9 @@ function Nav() {
   const [categories, setCategories] = useState([]);
   const [scategories, setSCategories] = useState([]);
   const [sscategories, setSSCategories] = useState([]);
+  const [ssscategories, setSSsCategories] = useState([]);
   const [Menus, setMenus] = useState([]); // Initial empty state for Men
-  const {ssid,istrue} =useAppContext()
-  useEffect(()=>{console.log(ssid)},[ssid])
+ 
   
   
   // Fetch categories on component mount
@@ -36,6 +36,14 @@ function Nav() {
     }
   };
 
+  const getSSSCategory = async () => {
+    try {
+      const res = await axios.get(`${api}/ssscat`);
+      setSSsCategories(res.data); // Store categories in state
+    } catch (error) {
+      console.error("Error fetching ssscategories:", error);
+    }
+  };
   const getSSCategory = async () => {
     try {
       const res = await axios.get(`${api}/sscat`);
@@ -49,11 +57,16 @@ function Nav() {
     getCategory();
     getSCategory();
     getSSCategory();
-  }, []);
+    getSSSCategory();
+  }, [scategories]);
 
   // Update Menus after categories are fetched
  useEffect(() => {
   setMenus([
+    {
+      name: "Bienvenue",
+      link: "/",
+    },
     // Only include "Les categories" if categories.length > 0
     ...(categories.length > 0
       ? [
@@ -62,7 +75,6 @@ function Nav() {
             subMenu: categories.map((e) => {
               return {
                 name: e.nom_cat,
-                desc: "Responsive design",
                 icon: PanelsTopLeft,
                 subMenu: scategories
                   .map((el) => {
@@ -74,12 +86,22 @@ function Nav() {
                             if (ele.sscat_id === el.id) {
                               return {
                                 name: ele.nom_scat,
-                                link:istrue?"/produit":"/" ,
-                                id:ele.id,
-                              };
-                            }
-                          })
-                          .filter(Boolean), // Remove undefined entries
+                                id: ele.id,
+                               subMenu: ssscategories
+                            .map((elem) => {
+                              if (elem.sscat_id === ele.id) {
+                                return {
+                                  name: elem.nom_ssscat,
+                                  id: elem.id,
+                                  link:`/liste_pro/${elem.id}`
+                                };
+                              }
+                            })
+                            .filter(Boolean),
+                                };
+                              }
+                            })
+                          .filter(Boolean),
                       };
                     }
                   })
@@ -94,31 +116,7 @@ function Nav() {
     // Static menu items that don't depend on categories
     {
       name: "À propos de nous",
-      link:"/about"
-    },
-    {
-      name: "Support",
-      subMenu: [
-        {
-          name: "Help",
-          desc: "Center",
-          icon: CircleHelp,
-        },
-        {
-          name: "Community",
-          desc: "Project help",
-          icon: MessageCircle,
-        },
-        {
-          name: "Emergency",
-          desc: "Urgent issues",
-          icon: TriangleAlert,
-        },
-      ],
-      gridCols: 1,
-    },
-    {
-      name: "Pricing",
+      link: "/about",
     },
     {
       name: "Contact",

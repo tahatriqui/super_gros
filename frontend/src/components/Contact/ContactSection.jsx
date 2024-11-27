@@ -23,7 +23,7 @@ const ContactSection = () => {
       <motion.div
         className="contact-info"
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        animate={{ opacity: 2 }}
         transition={{ duration: 1, delay: 0.2 }}
       >
         <div className="info-item">

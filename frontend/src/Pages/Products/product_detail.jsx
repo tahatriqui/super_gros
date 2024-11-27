@@ -1,19 +1,29 @@
-import React, { useState } from "react";
-import { motion } from "framer-motion"; // Importer Framer Motion
+import { motion } from "framer-motion";
 import "./product_detail.css";
 import Logo from "../../assets/Transparent.png";
+import { useAppContext } from "../../AppContext";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const ProductDetail = () => {
   const [selectedVariant, setSelectedVariant] = useState("Select");
   const [quantity, setQuantity] = useState(1);
+  const [findedProduct, setFindedProduct] = useState({});
 
-  const handleVariantChange = (e) => {
-    setSelectedVariant(e.target.value);
-  };
+  const { did } = useParams();
+  const { filteredProducts  } = useAppContext();
 
-  const handleQuantityChange = (e) => {
-    setQuantity(e.target.value);
-  };
+  useEffect(() => {
+    const filter = filteredProducts.find((e) => e.id == did);
+    if (filter) {
+      setFindedProduct({
+        ...filter,
+        details: typeof filter.details === "string"
+          ? JSON.parse(filter.details)
+          : filter.details,
+      });
+    }
+  }, [did, filteredProducts]);
 
   return (
     <div className="product-page">
@@ -25,7 +35,11 @@ const ProductDetail = () => {
         transition={{ duration: 0.8 }}
       >
         <div className="image-slider">
-          <img src={Logo} alt="Logo" className="product-image" />
+          <img
+            src={findedProduct?.image || Logo}
+            alt={findedProduct?.nom_pro || 'product not disponible'}
+            className="product-image"
+          />
         </div>
       </motion.div>
 
@@ -37,21 +51,12 @@ const ProductDetail = () => {
         transition={{ duration: 0.8 }}
       >
         <nav className="breadcrumb">
-          <a href="/">Shop all</a> &gt; <a href="/">Category</a> &gt; Product
-          Name
+          <a href="/">Category</a> &gt; 
+          {findedProduct?.nom_pro || "Unknown Product"}
         </nav>
-        <h1>Product Name</h1>
+        <h1>{findedProduct?.nom_pro || "Product Not Found"}</h1>
 
-        <p className="description">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-          varius enim in eros elementum tristique.
-        </p>
-
-        <ul>
-          <li>Lorem ipsum dolor sit amet.</li>
-          <li>Lorem ipsum dolor sit amet.</li>
-          <li>Lorem ipsum dolor sit amet.</li>
-        </ul>
+        <p className="description">{findedProduct?.desc_pro || "No description available"}</p>
 
         {/* Buttons */}
         <div className="buttons">
@@ -80,23 +85,22 @@ const ProductDetail = () => {
         >
           <motion.div className="tab" whileHover={{ scale: 1.02 }}>
             <h3>Details</h3>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse varius enim in eros elementum tristique.
-            </p>
-          </motion.div>
-          <motion.div className="tab" whileHover={{ scale: 1.02 }}>
-            <h3>Shipping</h3>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse varius enim in eros elementum tristique.
-            </p>
-          </motion.div>
-          <motion.div className="tab" whileHover={{ scale: 1.02 }}>
-            <h3>Returns</h3>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse varius enim in eros elementum tristique.
+            <p className="product-category">
+              {Array.isArray(findedProduct.details) && findedProduct.details.length > 0 ? (
+                <ul>
+                  {findedProduct.details.map((detail, idx) => (
+                    <li key={idx}>
+                      {Object.entries(detail).map(([key, value]) => (
+                        <div key={key}>
+                          <strong>{key}:</strong> {value}
+                        </div>
+                      ))}
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                "No details available"
+              )}
             </p>
           </motion.div>
         </motion.div>
