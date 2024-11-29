@@ -1,11 +1,12 @@
 .sb-footer-section-padding{
     padding: 2rem 2rem;
+   
 }
 .footer{
     background-color:white;
-     
+    display: flex;
+  flex-direction: column;
 }
-
 .sb-footer{
     display: flex;
     flex-direction: column;
@@ -79,12 +80,6 @@ a{
     line-height: 15px;
     color: black;
     font-weight: 600;
-}
-@media screen and (max-width: 768px){
-    .sb-footer-heading h1{
-        font-size: 44px;
-        line-height: 50px;
-    } 
 }
 @media screen and (max-width: 768px){
     .sb-footer-heading h1{

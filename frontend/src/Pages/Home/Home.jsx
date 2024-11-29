@@ -7,14 +7,13 @@ import ContactSection from "../../components/Contact/ContactSection.jsx";
 import Slideer from "./Slideer.jsx";
 const App = () => {
   const images = [
-    "https://supergros.ma/img/image9.jpg",
-    "https://supergros.ma/img/image7.jpg",
+    "https://supergros.ma/img/XCMG%20Picture%201.jpg",
     "https://supergros.ma/img/XCMG%20Picture%201.jpg",
   ];
   return (
     <>
       <div>
-        <Slideer images={images} autoPlay={false} interval={12000} />
+        <Slideer images={images} autoPlay={true} interval={12000} />
       </div>
       {/* Page principale */}
       <div className="full-page">

@@ -3,25 +3,23 @@ import axios from "axios";
 import DesktopMenu from "../DesktopMenu";
 import MobMenu from "../MobMenu";
 import Logo from "../../assets/Transparent.png";
-import { CircleHelp, MessageCircle, TriangleAlert, PanelsTopLeft } from "lucide-react";
+import { PanelsTopLeft } from "lucide-react";
 import { api } from "../../assets/domain"; 
+import { Link } from "react-router-dom";
 import { useAppContext } from "../../AppContext";
 
 function Nav() {
-  const [categories, setCategories] = useState([]);
-  const [scategories, setSCategories] = useState([]);
-  const [sscategories, setSSCategories] = useState([]);
-  const [ssscategories, setSSsCategories] = useState([]);
-  const [Menus, setMenus] = useState([]); // Initial empty state for Men
+  const {sscategories, setSSCategories,categories, setCategories,ssscategories, setSSsCategories} = useAppContext()
  
+  const [scategories, setSCategories] = useState([]);
   
   
-  // Fetch categories on component mount
+  const [Menus, setMenus] = useState([]);
 
   const getCategory = async () => {
     try {
       const res = await axios.get(`${api}/cat`);
-      setCategories(res.data); // Store categories in state
+      setCategories(res.data);
     } catch (error) {
       console.error("Error fetching categories:", error);
     }
@@ -30,7 +28,7 @@ function Nav() {
   const getSCategory = async () => {
     try {
       const res = await axios.get(`${api}/scat`);
-      setSCategories(res.data); // Store categories in state
+      setSCategories(res.data);
     } catch (error) {
       console.error("Error fetching scategories:", error);
     }
@@ -39,15 +37,16 @@ function Nav() {
   const getSSSCategory = async () => {
     try {
       const res = await axios.get(`${api}/ssscat`);
-      setSSsCategories(res.data); // Store categories in state
+      setSSsCategories(res.data);
     } catch (error) {
       console.error("Error fetching ssscategories:", error);
     }
   };
+  
   const getSSCategory = async () => {
     try {
       const res = await axios.get(`${api}/sscat`);
-      setSSCategories(res.data); // Store categories in state
+      setSSCategories(res.data);
     } catch (error) {
       console.error("Error fetching sscategories:", error);
     }
@@ -60,96 +59,90 @@ function Nav() {
     getSSSCategory();
   }, [scategories]);
 
-  // Update Menus after categories are fetched
- useEffect(() => {
-  setMenus([
-    {
-      name: "Bienvenue",
-      link: "/",
-    },
-    // Only include "Les categories" if categories.length > 0
-    ...(categories.length > 0
-      ? [
-          {
-            name: "Les categories",
-            subMenu: categories.map((e) => {
-              return {
-                name: e.nom_cat,
-                icon: PanelsTopLeft,
-                subMenu: scategories
-                  .map((el) => {
-                    if (el.categorie_id === e.id) {
-                      return {
-                        name: el.nom_scat,
-                        subMenu: sscategories
-                        
-                          .map((ele) => {
-                            if (ele.sscat_id === el.id) {
-                              return {
-                                name: ele.nom_scat,
-                                id: ele.id,
-                                
-                               subMenu: ssscategories
-                            .map((elem) => {
-                              if (elem.sscat_id === ele.id) {
+  useEffect(() => {
+    setMenus([
+      {
+        name: "l'accueil",
+        link: "/",
+      },
+      ...(categories.length > 0
+        ? [
+            {
+              name: "Les categories",
+              subMenu: categories.map((e) => {
+                return {
+                  name: e.nom_cat,
+                  icon: PanelsTopLeft,
+                  subMenu: scategories
+                    .map((el) => {
+                      if (el.categorie_id === e.id) {
+                        return {
+                          name: el.nom_scat,
+                          link:`product/${el.id}/${el.nom_scat}`,
+                          subMenu: sscategories
+                            .map((ele) => {
+                              if (ele.sscat_id === el.id) {
                                 return {
-                                  name: elem.nom_ssscat,
-                                  id: elem.id,
-                                  link:`/liste_pro/${elem.id}`
+                                  name: ele.nom_scat,
+                                  id: ele.id,
+                                  subMenu: ssscategories
+                                    .map((elem) => {
+                                      if (elem.sscat_id === ele.id) {
+                                        return {
+                                          name: elem.nom_ssscat,
+                                          id: elem.id,
+                                          link: `/liste_pro/${elem.id}`,
+                                        };
+                                      }
+                                    })
+                                    .filter(Boolean),
                                 };
                               }
                             })
                             .filter(Boolean),
-                                };
-                              }
-                            })
-                          .filter(Boolean),
-                      };
-                    }
-                  })
-                  .filter(Boolean), // Remove undefined entries
-              };
-            }),
-            gridCols: 1,
-          },
-        ]
-      : []),
-
-    // Static menu items that don't depend on categories
-    {
-      name: "À propos de nous",
-      link: "/about",
-    },
-    {
-      name: "Contact",
-    },
-  ]);
-}, [categories, scategories, sscategories]);
+                        };
+                      }
+                    })
+                    .filter(Boolean),
+                };
+              }),
+              gridCols: 3,
+            },
+          ]
+        : []),
+      {
+        name: "À propos de nous",
+        link: "/about",
+      },
+      {
+        name: "Contact",
+        link:"/#contact"
+      },
+    ]);
+  }, [categories, scategories, sscategories]);
 
   return (
-    <>
-      <div>
-        <header className="h-16 text-[15px] fixed inset-0 flex-center bg-[#ffff] z-[9999]">
-          <nav className="px-3.5 flex-center-between w-full max-w-7xl mx-auto relative z-[10000]">
-            <div className="flex-center gap-x-3 z-[10001] relative">
-              <img src={Logo} alt="Logo" className="size-10 w-[90px]" />
-            </div>
+    <div>
+      <header className="h-16 text-[15px] fixed inset-0 flex-center bg-[#ffff] z-[9999]">
+        <nav className="px-3.5 flex-center-between w-full max-w-7xl mx-auto relative z-[10000]">
+          <Link to={"/"} className="flex-center gap-x-3 z-[10001] relative ">
+            <img src={Logo} alt="Logo" className="size-10 w-[90px]" />
+          </Link>
 
-            <ul className="hidden gap-x-1 lg:flex-center relative z-[10000]">
-              {Menus.map((menu) => (
-                <DesktopMenu menu={menu} key={menu.name} />
-              ))}
-            </ul>
+          <ul className="hidden gap-x-1 lg:flex-center">
+            {Menus.map((menu) => (
+              <DesktopMenu menu={menu} key={menu.name} />
+            ))}
+          </ul>
 
-            <div className="flex-center gap-x-5 relative z-[10001]">
-              <div className="lg:hidden">
-                <MobMenu Menus={Menus} />
-              </div>
+          <div className="flex-center gap-x-5 relative z-[10001]">
+            <div className="lg:hidden">
+              <MobMenu Menus={Menus} />
             </div>
-          </nav>
-        </header>
-      </div>
-    </>
+          </div>
+        </nav>
+      </header>
+    </div>
   );
 }
 

@@ -1,175 +1,223 @@
-/* General Container */
 .products-container {
-  padding: 20px;
-  margin-top: 50px;
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-/* Header Section */
 .products-header {
-  width: 80%;
-  margin: 80px auto 20px auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
+  margin-bottom: 30px;
 }
 
 .products-title {
-  font-size: 2rem;
-  font-weight: bold;
-  margin: 0;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #333;
 }
 
 .products-description {
   font-size: 1rem;
-  color: #666;
-  margin-top: 5px;
+  color: #777;
 }
 
 .view-all-btn {
+  background-color: #FF5733;
+  color: white;
   padding: 10px 20px;
-  font-size: 1rem;
-  background-color: #6c757d;
-  color: #fff;
-  border: 2px solid #6c757d;
   border-radius: 5px;
+  border: none;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background-color 0.3s ease;
 }
 
 .view-all-btn:hover {
-  background-color: #5a6268;
+  background-color: #ff4521;
 }
 
-/* Slider Section */
 .products-slider {
-  width: 80%;
-  margin: 0 auto;
+  margin-top: 20px;
 }
 
 .product-card {
-  padding: 10px;
-  display: flex;
-  justify-content: center;
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  gap: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
 }
 
 .product-card-content {
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  text-align: center;
   padding: 20px;
-  margin: 0 auto;
-  width: 90%;
-  max-width: 300px;
+  text-align: center;
 }
 
 .product-image {
   width: 100%;
-  height: 250px;
-  object-fit: cover;
+  height: auto;
   border-radius: 8px;
   margin-bottom: 15px;
 }
 
 .product-name {
   font-size: 1.2rem;
-  font-weight: bold;
-  margin-bottom: 8px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10px;
 }
 
 .product-desc {
-  font-size: 0.9rem;
-  color: #777;
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 20px;
 }
 
-/* Custom Arrows */
-.arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+.details-btn {
+  background-color: #FF5733;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  font-weight: 600;
   cursor: pointer;
-  background: #fff;
-  border-radius: 50%;
-  padding: 10px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+.details-btn:hover {
+  background-color: #ff4521;
+}
+
+/* Custom Arrow Styling */
+.arrow {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  z-index: 10; /* Ensure arrows are above the slider */
+}
+
+.arrow:hover {
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
 .prev-arrow {
-  left: 10px;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
 }
 
 .next-arrow {
-  right: 10px;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
 }
 
-/* Responsive Design */
+/* Ensure slider has proper padding and positions the arrows correctly */
+.slick-slider {
+  position: relative;
+}
 
-/* For tablets */
-@media (max-width: 1024px) {
-  .products-header {
-    flex-direction: column;
-    text-align: center;
+.slick-slide {
+  position: relative;  /* Make sure this is relative so arrows can be positioned within the slider */
+}
+
+/* Slider Dots Customization */
+.slick-dots {
+  bottom: -30px;
+}
+
+.slick-dots li button:before {
+  font-size: 12px;
+  color: #FF5733;
+}
+
+.slick-dots li.slick-active button:before {
+  color: #333;
+}
+
+/* Global styles for product cards */
+.product-card {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transform: translateY(50px); /* Start from below */
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.product-card.fade-in {
+  opacity: 1;
+  transform: translateY(0); /* Slide into view */
+}
+
+/* Animation for product card fading in */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
   }
-
-  .view-all-btn {
-    margin-top: 15px;
-  }
-
-  .products-slider {
-    width: 90%;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-/* For smaller tablets and large phones */
-@media (max-width: 768px) {
-  .products-title {
-    font-size: 1.8rem;
-  }
-
-  .products-description {
-    font-size: 0.9rem;
-  }
-
-  .product-card-content {
-    max-width: 250px;
-    padding: 15px;
-  }
-
-  .product-image {
-    height: 200px;
-  }
+/* Apply animation to product cards */
+.product-card {
+  animation: fadeIn 0.8s ease-out forwards;
 }
 
-/* For mobile phones */
-@media (max-width: 480px) {
-  .products-title {
-    font-size: 1.5rem;
-  }
+.product-card-content {
+  padding: 20px;
+  text-align: center;
+}
 
-  .products-description {
-    font-size: 0.8rem;
-  }
+.product-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
 
-  .view-all-btn {
-    font-size: 0.8rem;
-    padding: 6px 12px;
-  }
+.product-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10px;
+}
 
-  .product-card-content {
-    max-width: 200px;
-    padding: 10px;
-  }
+.product-desc {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 20px;
+}
 
-  .product-image {
-    height: 150px;
-  }
+.details-btn {
+  background-color: #FF5733;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
 
-  .arrow {
-    padding: 8px;
-  }
+.details-btn:hover {
+  background-color: #ff4521;
 }

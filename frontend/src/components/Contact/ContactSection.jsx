@@ -4,7 +4,7 @@ import "./ContactSection.css"; // Fichier CSS séparé
 
 const ContactSection = () => {
   return (
-    <div className="contact-section">
+    <div className="contact-section" id="contact">
       {/* En-tête avec animation */}
       <motion.div
         className="contact-header"

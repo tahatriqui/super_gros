@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 
 const Slider = ({ images, autoPlay = true, interval = 3000 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -9,51 +10,53 @@ const Slider = ({ images, autoPlay = true, interval = 3000 }) => {
   };
 
   const prevSlide = () => {
-    setCurrentIndex(
-      (prevIndex) => (prevIndex - 1 + images.length) % images.length
-    );
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
   };
 
   const goToSlide = (index) => {
     setCurrentIndex(index);
   };
 
-  // Gestion du défilement automatique
+  // Autoplay logic with interval
   useEffect(() => {
     if (isPlaying) {
       const timer = setInterval(nextSlide, interval);
-      return () => clearInterval(timer); // Nettoyer l'intervalle
+      return () => clearInterval(timer); // Clear interval on cleanup
     }
-  }, [currentIndex, isPlaying, interval]);
+  }, [isPlaying, interval]);
+
+  if (!images || images.length === 0) {
+    return <div>No images to display</div>;
+  }
 
   return (
-    <div style={styles.sliderContainer}>
-      {/* Images */}
-      <div style={styles.slider}>
+    <div
+      style={styles.sliderContainer}
+      onMouseEnter={() => setIsPlaying(false)} // Pause on hover
+      onMouseLeave={() => setIsPlaying(true)} // Resume on mouse leave
+    >
+      <div
+        style={{
+          ...styles.slider,
+          transform: `translateX(-${currentIndex * 100}%)`, // Apply translateX to move slides
+        }}
+      >
         {images.map((image, index) => (
-          <div
-            key={index}
-            style={{
-              ...styles.slide,
-              opacity: index === currentIndex ? 1 : 0,
-              transform: `translateX(${100 * (index - currentIndex)}%)`,
-            }}
-          >
+          <div key={index} style={styles.slide}>
             <img src={image} alt={`Slide ${index}`} style={styles.image} />
-            
           </div>
         ))}
       </div>
 
-      {/* Boutons Précédent/Suivant */}
-      <button onClick={prevSlide} style={styles.buttonLeft}>
+      {/* Navigation buttons */}
+      <button onClick={prevSlide} style={styles.buttonLeft} aria-label="Previous slide">
         ◀
       </button>
-      <button onClick={nextSlide} style={styles.buttonRight}>
+      <button onClick={nextSlide} style={styles.buttonRight} aria-label="Next slide">
         ▶
       </button>
 
-      {/* Indicateurs */}
+      {/* Indicators */}
       <div style={styles.indicators}>
         {images.map((_, index) => (
           <span
@@ -70,30 +73,30 @@ const Slider = ({ images, autoPlay = true, interval = 3000 }) => {
   );
 };
 
+// Styles remain the same as the original code
 const styles = {
   sliderContainer: {
     position: "relative",
-    width: "100%", // Largeur du slider (reste ajustable)
-    height: "500px", // Hauteur fixe plus petite
-    margin: "0 auto", // Centre horizontalement
+    width: "100%",
+    height: "500px",
+    margin: "0 auto",
     overflow: "hidden",
     borderRadius: "10px",
   },
   slider: {
     display: "flex",
-    transition: "transform 0.5s ease-in-out",
-    height: "100%", // Occupe toute la hauteur du conteneur
+    transition: "transform 0.5s ease-in-out", // Smooth transition for sliding
+    height: "100%",
   },
   slide: {
     minWidth: "100%",
-    transition: "opacity 0.5s ease-in-out",
+    height: "100%",
     position: "relative",
-    height: "100%", // Occupe toute la hauteur
   },
   image: {
     width: "100%",
-    height: "100%", // Image adaptée à la hauteur
-    objectFit: "cover", // Coupe l'image si elle dépasse pour garder une bonne apparence
+    height: "100%",
+    objectFit: "cover",
     borderRadius: "10px",
   },
   buttonLeft: {
@@ -136,6 +139,10 @@ const styles = {
   },
 };
 
-
+Slider.propTypes = {
+  images: PropTypes.array.isRequired,
+  autoPlay: PropTypes.bool,
+  interval: PropTypes.number,
+};
 
 export default Slider;

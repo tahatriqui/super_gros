@@ -7,8 +7,8 @@ import { useAppContext } from "../../AppContext";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-function Products() {
-  const { sscategories, categories } = useAppContext();
+function Sproducts() {
+  const { ssscategories} = useAppContext();
   const [filter, setFilter] = useState([]);
   const navigate = useNavigate();
   const { id, name } = useParams();
@@ -56,8 +56,8 @@ function Products() {
 
  useEffect(() => {
   // Make sure the sscategories are loaded before proceeding
-  if (sscategories.length > 0) {
-    const filtered = sscategories.filter((e) => e.scat_id == id);
+  if (ssscategories.length > 0) {
+    const filtered = ssscategories.filter((e) => e.sscat_id == id);
     setFilter(filtered);
 
     // If no category is found, redirect to home
@@ -67,7 +67,7 @@ function Products() {
       setIsLoaded(true);  // Trigger the animation when data is loaded
     }
   }
-}, [id, sscategories, navigate]);
+}, [id, ssscategories, navigate]);
   return (
     <div className="products-container">
       {/* Header Section */}
@@ -89,12 +89,12 @@ function Products() {
               <div className="product-card-content">
                 <img
                   src="https://www.groupe-premium.com/socopim/wp-content/uploads/2022/02/123-300x162.png"
-                  alt={product.nom_scat}
+                  alt={product.nom_ssscat}
                   className="product-image"
                 />
-                <h2 className="product-name">{product.nom_scat}</h2>
+                <h2 className="product-name">{product.nom_ssscat}</h2>
                 <p className="product-desc">{product.desc}</p>
-                <Link to={`/sproduct/${product.id}/${product.nom_scat}`} className="details-btn">Détails</Link>
+                <Link to={`/produit_det/${product.id}`} className="details-btn">Détails</Link>
               </div>
             </div>
           ))}
@@ -104,4 +104,4 @@ function Products() {
   );
 }
 
-export default Products;
+export default Sproducts;

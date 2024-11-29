@@ -6,6 +6,12 @@ body {
   background-color: #f8f8f8;
 }
 
+.products-header {
+  margin-bottom: 40px;
+  text-align: left;
+  margin-top: 20px;
+}
+
 .products-container {
   padding: 20px;
   margin-top: 50px;
@@ -20,16 +26,16 @@ body {
 .products-description {
   font-size: 1rem;
   color: #666;
-  margin-top: 5px;
+  margin-top: 15px;
 }
 
 /* Products Grid */
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); /* Smaller cards for tighter fit */
+  gap: 15px; /* Reduced gap between cards */
   justify-items: center;
-  margin-bottom: 40px;
+  margin-bottom: 20px; /* Reduced bottom spacing */
 }
 
 /* Product Card */
@@ -38,42 +44,40 @@ body {
   border: 1px solid #ddd;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 300px;
-  padding: 30px;
+  width: 340px; /* Adjusted width for compact layout */
+  padding: 20px; /* Reduced padding */
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 0; /* Removed extra margins */
 }
 
+/* Product Image Placeholder */
 .product-image-placeholder {
   background-color: #eaeaea;
   width: 100%;
   height: auto;
   border-radius: 10px;
-  margin-bottom: 15px;
+  margin-bottom: 10px; /* Reduced spacing below image */
 }
 
+/* Product Title */
 .product-title {
   font-size: 1.2rem;
   font-weight: bold;
   color: #333;
-  margin: 10px 0 5px;
+  margin: 5px 0; /* Reduced top and bottom margin */
 }
 
+/* Product Category */
 .product-category {
   font-size: 1rem;
   color: #666;
-  margin: 5px 0;
+  margin: 5px 0; /* Reduced spacing */
 }
 
-.product-price {
-  font-size: 1.1rem;
-  font-weight: bold;
-  color: #333;
-  margin: 10px 0;
-}
-
+/* Product Button */
 .product-button {
   background-color: red;
   color: white;
@@ -83,24 +87,10 @@ body {
   cursor: pointer;
   font-size: 1rem;
   transition: background-color 0.3s ease;
+  margin-top: 10px; /* Reduced spacing above the button */
 }
 
 .product-button:hover {
   background-color: #0056b3;
 }
 
-/* Voir Tout Button */
-.view-all-button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  font-size: 1.1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.view-all-button:hover {
-  background-color: #0056b3;
-}
