@@ -55,10 +55,10 @@ function Footer() {
             <h4>Suivez-nous</h4>
             <div className="socialmedia">
               <p></p>
-              <p style={{ marginRight:'4px' }}>
+              <p style={{ marginRight: "4px" }}>
                 <Facebook />
               </p>
-              <p style={{ marginRight:'8px' }}>
+              <p style={{ marginRight: "8px" }}>
                 <Instagram />
               </p>
               <p>

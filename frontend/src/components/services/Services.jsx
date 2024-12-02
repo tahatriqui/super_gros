@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion"; // Importer Framer Motion
 import "./Services.css";
 import { sdata } from "../../../public/solutionData";
@@ -56,7 +55,7 @@ const Services = () => {
       >
         <div className="services__container">
           {services
-            ? services.map((service,i) => (
+            ? services.map((service, i) => (
                 <motion.div
                   key={`${i}-${service.name}`}
                   className="service-card"
@@ -96,7 +95,7 @@ const Services = () => {
       >
         <div className="articles__container">
           {articles
-            ? articles.map((article,i) => (
+            ? articles.map((article, i) => (
                 <motion.div
                   key={i}
                   className="article-card"

@@ -4,16 +4,24 @@ import DesktopMenu from "../DesktopMenu";
 import MobMenu from "../MobMenu";
 import Logo from "../../assets/Transparent.png";
 import { PanelsTopLeft } from "lucide-react";
-import { api } from "../../assets/domain"; 
+import { api } from "../../assets/domain";
 import { Link } from "react-router-dom";
 import { useAppContext } from "../../AppContext";
 
 function Nav() {
-  const {solutionId,SetSolutionId,sscategories, setSSCategories,categories, setCategories,ssscategories, setSSsCategories} = useAppContext()
- 
+  const {
+    solutionId,
+    SetSolutionId,
+    sscategories,
+    setSSCategories,
+    categories,
+    setCategories,
+    ssscategories,
+    setSSsCategories,
+  } = useAppContext();
+
   const [scategories, setSCategories] = useState([]);
-  
-  
+
   const [Menus, setMenus] = useState([]);
 
   const getCategory = async () => {
@@ -42,7 +50,7 @@ function Nav() {
       console.error("Error fetching ssscategories:", error);
     }
   };
-  
+
   const getSSCategory = async () => {
     try {
       const res = await axios.get(`${api}/sscat`);
