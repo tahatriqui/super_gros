@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import { useAppContext } from "../../AppContext";
 
 function Nav() {
-  const {sscategories, setSSCategories,categories, setCategories,ssscategories, setSSsCategories} = useAppContext()
+  const {solutionId,SetSolutionId,sscategories, setSSCategories,categories, setCategories,ssscategories, setSSsCategories} = useAppContext()
  
   const [scategories, setSCategories] = useState([]);
   
@@ -68,7 +68,8 @@ function Nav() {
       ...(categories.length > 0
         ? [
             {
-              name: "Les categories",
+              name: "Nos Produits",
+              width: "350px",
               subMenu: categories.map((e) => {
                 return {
                   name: e.nom_cat,
@@ -78,7 +79,7 @@ function Nav() {
                       if (el.categorie_id === e.id) {
                         return {
                           name: el.nom_scat,
-                          link:`product/${el.id}/${el.nom_scat}`,
+                          link: `product/${el.id}/${el.nom_scat}`,
                           subMenu: sscategories
                             .map((ele) => {
                               if (ele.sscat_id === el.id) {
@@ -106,17 +107,27 @@ function Nav() {
                     .filter(Boolean),
                 };
               }),
-              gridCols: 3,
+              gridCols: 1,
             },
           ]
         : []),
+      {
+        name: "Nos services",
+        width: "140px",
+        subMenu: [
+          { name: "logistique", link: "/Services/0" },
+          { name: "achat", link: "/Services/1" },
+          { name: "transport", link: "/Services/2" },
+          { name: "stockage", link: "/Services/3" },
+        ],
+      },
       {
         name: "À propos de nous",
         link: "/about",
       },
       {
         name: "Contact",
-        link:"/#contact"
+        link: "/#contact",
       },
     ]);
   }, [categories, scategories, sscategories]);

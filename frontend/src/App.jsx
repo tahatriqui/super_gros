@@ -10,6 +10,8 @@ import Page404 from './Pages/404/page404.jsx';
 import { AppProvider } from './AppContext.jsx';
 import Products from './Pages/Products/Products.jsx';
 import Sproducts from './Pages/Products/SProducts.jsx';
+import Services from "./components/services/Services.jsx";
+
 export default function App() {
   return (
     <>
@@ -19,15 +21,16 @@ export default function App() {
           <Routes>
             <Route path={"/"} element={<Home />} />
             <Route path={"/about"} element={<About />} />
-           <Route path={'/sproduct/:id/:name'} element={<Sproducts />} />
-            <Route path={'/product/:id/:name'} element={<Products/>}/>
+            <Route path={"/sproduct/:id/:name"} element={<Sproducts />} />
+            <Route path={"/product/:id/:name"} element={<Products />} />
             <Route path={"/produit_det/:did"} element={<Product_detail />} />
             <Route path={"/liste_pro/:id"} element={<Liste />} />
             <Route path={"/liste2/:id"} element={<Liste2 />} />
+            <Route path={"/Services/:id"} element={<Services />} />
             {/* Catch-all route pour afficher la page 404 */}
             <Route path="*" element={<Page404 />} />
           </Routes>
-          <Footer/>
+          <Footer />
         </BrowserRouter>
       </AppProvider>
     </>

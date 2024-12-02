@@ -94,3 +94,13 @@ body {
   background-color: #0056b3;
 }
 
+@media (max-width: 768px) {
+  .products-title {
+  font-size:20px !important;
+margin-top:20px;
+}
+.products-description{
+  font-size:12px !important;
+  margin-right:10px !important
+}
+}

@@ -11,13 +11,15 @@ export const AppProvider = ({ children }) => {
   const [sscategories, setSSCategories] = useState([]);
    const [categories, setCategories] = useState([]);
  const [ssscategories, setSSsCategories] = useState([]);
+  const [solutionId,SetSolutionId] = useState(0)
+
   const getProduct = async ()  =>{
     const res =  await axios.get(`${api}/produit`)
     setData(res.data);
   }
   useEffect(()=>{getProduct()},[])
   return (
-    <AppContext.Provider value={{ data, setData,filteredProducts,setFilteredProducts,sscategories, setSSCategories,categories, setCategories,ssscategories, setSSsCategories }}>
+    <AppContext.Provider value={{ solutionId,SetSolutionId,data, setData,filteredProducts,setFilteredProducts,sscategories, setSSCategories,categories, setCategories,ssscategories, setSSsCategories }}>
       {children}
     </AppContext.Provider>
   );

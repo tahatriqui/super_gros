@@ -38,8 +38,8 @@ a{
     flex-direction: row;
 }
 
-.socialmedia img{
-    width: 80%;
+.socialmedia p{
+   color:red
 }
 
 .sb-footer-links-div h4{

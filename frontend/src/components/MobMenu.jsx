@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function MobMenu({ Menus }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [clicked, setClicked] = useState({}); // Object to track expanded menus
+  const [clicked, setClicked] = useState({});
 
   const toggleDrawer = () => {
     setIsOpen(!isOpen);
@@ -26,30 +27,39 @@ export default function MobMenu({ Menus }) {
     const key = `${level}-${index}`;
     setClicked((prev) => ({
       ...prev,
-      [key]: !prev[key], // Toggle the current menu's state
+      [key]: !prev[key], // Toggle the submenu state
     }));
+  };
+
+  const handleLinkClick = () => {
+    setIsOpen(false); // Close the menu when a link is clicked
   };
 
   const renderMenu = (menuItems, level = 0) => {
     return (
       <ul className={`ml-${level * 5}`}>
-        {menuItems.map(({ name, subMenu, icon: Icon }, i) => {
-          const key = `${level}-${i}`; // Unique key for this level and index
+        {menuItems.map(({ name, subMenu, link }, i) => {
+          const key = `${level}-${i}`;
           const isClicked = clicked[key];
-          const hasSubMenu = Array.isArray(subMenu) && subMenu.length > 0; // Ensure valid submenu
+          const hasSubMenu = Array.isArray(subMenu) && subMenu.length > 0;
 
           return (
             <li key={name} className="mt-2">
               <span
-                className="relative p-4 rounded-md cursor-pointer flex-center-between hover:bg-white/5"
-                onClick={() => {
-                  if (hasSubMenu) {
-                    handleSubMenuClick(level, i);
-                  }
-                }}
+                className="relative w-full p-4 rounded-md cursor-pointer flex-center-between hover:bg-white/5"
+                onClick={() => hasSubMenu && handleSubMenuClick(level, i)} // Handle submenu click
               >
-                {Icon && <Icon size={17} />}
-                <span>{name}</span>
+                {link ? (
+                  <Link
+                    to={link}
+                    className="block w-full text-sm font-semibold" // Ensure Link takes full width
+                    onClick={handleLinkClick}
+                  >
+                    {name}
+                  </Link>
+                ) : (
+                  <span className="text-sm font-semibold">{name}</span>
+                )}
                 {hasSubMenu && (
                   <ChevronDown
                     className={`ml-auto transition-transform ${
@@ -65,7 +75,8 @@ export default function MobMenu({ Menus }) {
                   variants={subMenuDrawer}
                   className="ml-5"
                 >
-                  {renderMenu(subMenu, level + 1)} {/* Recursive rendering */}
+                  {renderMenu(subMenu, level + 1)}{" "}
+                  {/* Recursive rendering of submenus */}
                 </motion.ul>
               )}
             </li>

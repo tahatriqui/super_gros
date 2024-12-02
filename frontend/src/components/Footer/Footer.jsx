@@ -1,7 +1,7 @@
-import React from "react";
 import "./Footer.css";
-
-
+import { Facebook } from "lucide-react";
+import { Instagram } from "lucide-react";
+import { Linkedin } from "lucide-react";
 function Footer() {
   return (
     <div id="footer" className="footer">
@@ -55,14 +55,14 @@ function Footer() {
             <h4>Suivez-nous</h4>
             <div className="socialmedia">
               <p></p>
-              <p>
-                
+              <p style={{ marginRight:'4px' }}>
+                <Facebook />
+              </p>
+              <p style={{ marginRight:'8px' }}>
+                <Instagram />
               </p>
               <p>
-                <img src="" alt="" />
-              </p>
-              <p>
-                <img src="" alt="" />
+                <Linkedin />
               </p>
             </div>
           </div>

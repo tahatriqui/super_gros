@@ -66,58 +66,66 @@ const Liste2 = () => {
   return (
     <div className="products-container">
       <div className="products-header">
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center", // Vertically align items
-            padding: "10px 0", // Optional spacing
-          }}
-        >
-          <div>
-            <h1 className="products-title">Les Produits</h1>
-            <p className="products-description">
-              Découvrez notre large gamme de produits.
-            </p>
-          </div>
+      <div
+  style={{
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: "10px 0", // Optional spacing
+    width: "100%", // Ensure the parent spans the full width
+  }}
+>
+  {/* Title and description */}
+  <div style={{ flex: 1 }}>
+    <h1 className="products-title">Les Produits</h1>
+    <p className="products-description">
+      Découvrez notre large gamme de produits.
+    </p>
+  </div>
 
-          {/* Search bar */}
-          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-            <input
-              onChange={handleChange}
-              ref={inputRef}
-              type="text"
-              placeholder="Search..."
-              style={{
-                padding: "8px 12px",
-                border: "1px solid #ccc",
-                borderRadius: "5px",
-                outline: "none",
-                fontSize: "14px",
-              }}
-            />
-            <button
+  {/* Search bar */}
+  <div
+    style={{
+      display: "flex",
+      alignItems: "center",
+      gap: "10px",
+    }}
+  >
+    <input
+      onChange={handleChange}
+      ref={inputRef}
+      type="text"
+      placeholder="Search..."
+      style={{
+        padding: "8px 12px",
+        border: "1px solid #ccc",
+        borderRadius: "5px",
+        outline: "none",
+        fontSize: "14px",
+      }}
+    />
+    <button
+      onClick={handleChange}
+      style={{
+        background: "white",
+        border: "none",
+        cursor: "pointer",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <FaSearch
+        style={{
+          width: "20px",
+          height: "20px",
+          color: "red",
+        }}
+      />
+    </button>
+  </div>
+</div>
 
-            onClick={handleChange}
-              style={{
-                background: "white",
-                border: "none",
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <FaSearch
-                style={{
-                  width: "20px",
-                  height: "20px",
-                  color: "red",
-                }}
-              />
-            </button>
-          </div>
-        </div>
       </div>
 
       <div className="products-grid">

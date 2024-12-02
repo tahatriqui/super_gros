@@ -62,14 +62,7 @@ const SolutionsSection = () => {
           </p>
         </motion.div>
       </div>
-      <motion.button
-        className="button"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 0.6 }}
-      >
-        En savoir plus
-      </motion.button>
+      
     </div>
   );
 };

@@ -36,20 +36,14 @@ const App = () => {
               adaptés à l’industrie, au BTP, et bien plus encore.
             </p>
             <div className="buttons">
-              <motion.button
-                className="btn-primary"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                En savoir plus
-              </motion.button>
-              <motion.button
+              <motion.a
+                href="#contact"
                 className="btn-secondary"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
               >
                 Contact
-              </motion.button>
+              </motion.a>
             </div>
           </motion.div>
 
@@ -71,7 +65,7 @@ const App = () => {
 
       {/* Autres sections */}
       <ProductsPage />
-      <SolutionSection />
+<SolutionSection/>
       <ContactSection />
     </>
   );

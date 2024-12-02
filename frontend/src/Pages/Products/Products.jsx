@@ -14,6 +14,7 @@ function Products() {
   const { id, name } = useParams();
 
   const [isLoaded, setIsLoaded] = useState(false);
+ 
 
   // Custom Previous Arrow
   const PrevArrow = ({ onClick }) => (
@@ -62,30 +63,33 @@ function Products() {
 
     // If no category is found, redirect to home
     if (filtered.length === 0) {
-      navigate('/');
+      navigate(`/`);
     } else {
       setIsLoaded(true);  // Trigger the animation when data is loaded
     }
   }
 }, [id, sscategories, navigate]);
+
   return (
     <div className="products-container">
       {/* Header Section */}
       <div className="products-header">
         <div>
           <h1 className="products-title">{name}</h1>
-          <p className="products-description">Découvrez notre large gamme de produits.</p>
+          <p className="products-description">
+            Découvrez notre large gamme de categories.
+          </p>
         </div>
-        <button className="view-all-btn" onClick={() => console.log("Voir tout")}>
-          Voir tout
-        </button>
       </div>
 
       {/* Slider Section */}
       <section className="products-slider">
         <Slider {...sliderSettings}>
           {filter.map((product) => (
-            <div key={product.id} className={`product-card ${isLoaded ? "fade-in" : ""}`}>
+            <div
+              key={product.id}
+              className={`product-card ${isLoaded ? "fade-in" : ""}`}
+            >
               <div className="product-card-content">
                 <img
                   src="https://www.groupe-premium.com/socopim/wp-content/uploads/2022/02/123-300x162.png"
@@ -94,7 +98,12 @@ function Products() {
                 />
                 <h2 className="product-name">{product.nom_scat}</h2>
                 <p className="product-desc">{product.desc}</p>
-                <Link to={`/sproduct/${product.id}/${product.nom_scat}`} className="details-btn">Détails</Link>
+                <Link
+                  to={`/sproduct/${product.id}/${product.nom_scat}`}
+                  className="details-btn"
+                >
+                  voir plus
+                </Link>
               </div>
             </div>
           ))}

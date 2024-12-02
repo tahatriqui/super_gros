@@ -82,7 +82,7 @@ const Liste2 = () => {
           </div>
 
           {/* Search bar */}
-          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+          <div >
             <input
               onChange={handleChange}
               ref={inputRef}

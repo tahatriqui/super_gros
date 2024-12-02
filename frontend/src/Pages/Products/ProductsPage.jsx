@@ -1,4 +1,3 @@
-import React from "react";
 import { motion } from "framer-motion"; // Importation de Framer Motion
 import "./ProductsPage.css"; // Fichier CSS séparé
 
@@ -71,9 +70,7 @@ const ProductsPage = () => {
           </p>
         </motion.div>
       </div>
-      <div className="buttons">
-        <button className="btn-primary">Explorer</button>
-      </div>
+      
     </div>
   );
 };
