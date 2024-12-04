@@ -87,87 +87,91 @@ export default function DesktopMenu({ menu }) {
   }, [location]);
 
   return (
-    <motion.li className="relative group" key={menu.name} ref={menuRef}>
-      {/* Main Menu Item */}
-      {menu.link ? (
-        <Link
-          to={menu.link}
-          className="flex items-center gap-2 px-4 py-2 transition-all duration-300 ease-in-out transform rounded-lg cursor-pointer hover:bg-gray-200 hover:scale-105"
-        >
-          {menu.name}
-          {menu.subMenu?.length > 0 && <ChevronDown />}
-        </Link>
-      ) : (
-        <div
-          className="flex items-center gap-2 px-4 py-2 transition-all duration-300 ease-in-out transform rounded-lg cursor-pointer hover:bg-gray-200 hover:scale-105"
-          onClick={() => handleMenuClick(menu.name)}
-        >
-          {menu.name}
-          {menu.subMenu?.length > 0 && <ChevronDown />}
-        </div>
-      )}
-
-      {/* First-Level Submenu */}
-      {activeMenuState.activeSubMenu === menu.name &&
-        menu.subMenu?.length > 0 && (
-          <motion.div
-            className="z-10 mt-2 bg-white rounded-lg shadow-xl submenu-container"
-            initial="exit"
-            animate="enter"
-            variants={subMenuAnimate}
-            style={{ width: menu.width }}
+    <>
+      <motion.li className="relative group" key={menu.name} ref={menuRef}>
+        {/* Main Menu Item */}
+        {menu.link ? (
+          <Link
+            to={menu.link}
+            className="flex items-center gap-2 px-4 py-2 transition-all duration-300 ease-in-out transform rounded-lg cursor-pointer hover:bg-gray-200 hover:scale-105"
           >
-            <div className="p-4 space-y-2">
-              {menu.subMenu.map((submenu, i) => (
-                <div key={i} className="relative">
-                  <div
-                    className="flex items-center justify-between px-2 py-1 transition-all duration-300 ease-in-out transform rounded-md cursor-pointer hover:bg-gray-100 hover:scale-105"
-                    onClick={() => handleNestedMenuClick(submenu.name)}
-                  >
-                    {submenu.link ? (
-                      <Link
-                        to={submenu.link || "#"}
-                        className="text-sm font-semibold"
-                        onClick={handleMenuItemClick}
-                      >
-                        {submenu.name}
-                      </Link>
-                    ) : (
-                      <div className="text-sm font-semibold">
-                        {submenu.name}
-                      </div>
-                    )}
-                    {submenu.subMenu?.length > 0 && <ChevronRight />}
-                  </div>
-
-                  {/* Second-Level Submenu */}
-                  {activeMenuState.activeNestedSubMenu === submenu.name &&
-                    submenu.subMenu?.length > 0 && (
-                      <motion.div
-                        className="z-20 mt-0 ml-2 bg-white rounded-lg shadow-xl submenu-nested"
-                        initial="exit"
-                        animate="enter"
-                        variants={subMenuAnimate}
-                      >
-                        <div className="p-4 space-y-2">
-                          {submenu.subMenu.map((nestedItem, j) => (
-                            <Link
-                              key={j}
-                              to={nestedItem.link || "#"}
-                              className="block px-2 py-1 text-sm font-semibold transition-all duration-300 ease-in-out transform rounded-md cursor-pointer hover:bg-gray-100 hover:scale-105"
-                              onClick={handleMenuItemClick}
-                            >
-                              {nestedItem.name}
-                            </Link>
-                          ))}
-                        </div>
-                      </motion.div>
-                    )}
-                </div>
-              ))}
-            </div>
-          </motion.div>
+            {menu.name}
+            {menu.subMenu?.length > 0 && <ChevronDown />}
+          </Link>
+        ) : (
+          <div
+            className="flex items-center gap-2 px-4 py-2 transition-all duration-300 ease-in-out transform rounded-lg cursor-pointer hover:bg-gray-200 hover:scale-105"
+            onClick={() => handleMenuClick(menu.name)}
+          >
+            {menu.name}
+            {menu.subMenu?.length > 0 && <ChevronDown />}
+          </div>
         )}
-    </motion.li>
+
+        {/* First-Level Submenu */}
+        {activeMenuState.activeSubMenu === menu.name &&
+          menu.subMenu?.length > 0 && (
+            <motion.div
+              className="z-10 mt-2 bg-white rounded-lg shadow-xl submenu-container"
+              initial="exit"
+              animate="enter"
+              variants={subMenuAnimate}
+              style={{ width: menu.width }}
+            >
+              <div className="p-4 space-y-2">
+                {menu.subMenu.map((submenu, i) => (
+                  <div key={i} className="relative">
+                    <div
+                      className="flex items-center justify-between px-2 py-1 transition-all duration-300 ease-in-out transform rounded-md cursor-pointer hover:bg-gray-100 hover:scale-105"
+                      onClick={() => handleNestedMenuClick(submenu.name)}
+                    >
+                      {submenu.link ? (
+                        <Link
+                          to={submenu.link || "#"}
+                          className="text-sm font-semibold"
+                          onClick={handleMenuItemClick}
+                        >
+                          {submenu.name}
+                        </Link>
+                      ) : (
+                        <div className="text-sm font-semibold">
+                          {submenu.name}
+                        </div>
+                      )}
+                      {submenu.subMenu?.length > 0 && <ChevronRight />}
+                    </div>
+
+                    {/* Second-Level Submenu */}
+                    {activeMenuState.activeNestedSubMenu === submenu.name &&
+                      submenu.subMenu?.length > 0 && (
+                        <motion.div
+                          className="z-20 mt-0 ml-2 bg-white rounded-lg shadow-xl submenu-nested"
+                          initial="exit"
+                          animate="enter"
+                          variants={subMenuAnimate}
+                        >
+                          <div className="p-4 space-y-2">
+                            {submenu.subMenu.map((nestedItem, j) => (
+                              <Link
+                                key={j}
+                                to={nestedItem.link || "#"}
+                                className="block px-2 py-1 text-sm font-semibold transition-all duration-300 ease-in-out transform rounded-md cursor-pointer hover:bg-gray-100 hover:scale-105"
+                                onClick={handleMenuItemClick}
+                              >
+                                {nestedItem.name}
+                              </Link>
+                            ))}
+                          </div>
+                        </motion.div>
+                      )}
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          )}
+      </motion.li>
+
+      
+    </>
   );
 }

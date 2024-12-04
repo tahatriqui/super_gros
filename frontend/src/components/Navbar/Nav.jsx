@@ -147,11 +147,13 @@ function Nav() {
           <Link to={"/"} className="flex-center gap-x-3 z-[10020] relative ">
             <img src={Logo} alt="Logo" className="w-[auto] h-[60px]" />
           </Link>
+         
 
           <ul className="hidden gap-x-1 lg:flex-center">
             {Menus.map((menu) => (
               <DesktopMenu menu={menu} key={menu.name} />
             ))}
+            
           </ul>
 
           <div className="flex-center gap-x-5 relative z-[10001]">
