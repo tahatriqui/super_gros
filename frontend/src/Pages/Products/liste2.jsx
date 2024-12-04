@@ -178,7 +178,7 @@ const Liste2 = () => {
               marginBottom: "20vh",
             }}
           >
-            No products exist.
+            il n'a pas de produit.
           </p>
         ) : (
           // Display loading placeholders

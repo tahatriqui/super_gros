@@ -60,25 +60,16 @@
   text-decoration: underline;
 }
 
-h1 {
-  font-size: 24px;
+.nompro {
+  font-size: 30px;
   margin-bottom: 10px;
+    color: #CC373B;
 }
 
-.price {
-  font-size: 20px;
-  color: #000;
-  margin-bottom: 10px;
-}
-
-.rating {
-  font-size: 16px;
-  color: #555;
-  margin-bottom: 15px;
-}
 
 .description {
   margin-bottom: 15px;
+   font-size: 20px;
 }
 
 ul {
@@ -170,8 +161,9 @@ align-items: left; /* Centrer les boutons */
 }
 
 .tab h3 {
-  font-size: 18px;
+  font-size: 30px;
   margin-bottom: 5px;
+  color: #CC373B;
 }
 
 .tab p {
@@ -270,4 +262,45 @@ align-items: left; /* Centrer les boutons */
   .tab p {
     font-size: 13px;
   }
+}
+.product-page {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+.details-container {
+  border-top: 1px solid #ccc;
+  margin-top: 20px;
+  padding-top: 10px;
+}
+
+.details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.details-header h3 {
+  font-size: 18px;
+  margin: 0;
+}
+
+.toggle-button {
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #CC373B;
+}
+
+.toggle-button:hover {
+  color: black;
+}
+
+.details-content {
+  margin-top: 10px;
+  font-size: 20px;
+  color: #555;
 }

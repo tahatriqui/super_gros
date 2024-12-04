@@ -9,18 +9,20 @@ const ProductDetail = () => {
   const [selectedVariant, setSelectedVariant] = useState("Select");
   const [quantity, setQuantity] = useState(1);
   const [findedProduct, setFindedProduct] = useState({});
+  const [showDetails, setShowDetails] = useState(false); // Ajout d'un état pour afficher/masquer les détails
 
   const { did } = useParams();
-  const { filteredProducts  } = useAppContext();
+  const { filteredProducts } = useAppContext();
 
   useEffect(() => {
     const filter = filteredProducts.find((e) => e.id == did);
     if (filter) {
       setFindedProduct({
         ...filter,
-        details: typeof filter.details === "string"
-          ? JSON.parse(filter.details)
-          : filter.details,
+        details:
+          typeof filter.details === "string"
+            ? JSON.parse(filter.details)
+            : filter.details,
       });
     }
   }, [did, filteredProducts]);
@@ -37,7 +39,7 @@ const ProductDetail = () => {
         <div className="image-slider">
           <img
             src={findedProduct?.image || Logo}
-            alt={findedProduct?.nom_pro || 'product not disponible'}
+            alt={findedProduct?.nom_pro || "product not disponible"}
             className="product-image"
           />
         </div>
@@ -51,42 +53,32 @@ const ProductDetail = () => {
         transition={{ duration: 0.8 }}
       >
         <nav className="breadcrumb">
-          <a href="/">Category</a> &gt; 
+          <a href="/">Category</a> &gt;{" "}
           {findedProduct?.nom_pro || "Unknown Product"}
         </nav>
-        <h1>{findedProduct?.nom_pro || "il n'a pas de produit "}</h1>
+        <h1 className="nompro">
+          {findedProduct?.nom_pro || "il n'a pas de produit "}
+        </h1>
 
-        <p className="description">{findedProduct?.desc_pro || "IL n'a pas de description "}</p>
+        <p className="description">
+          {findedProduct?.desc_pro || "IL n'a pas de description "}
+        </p>
 
-        {/* Buttons */}
-        <div className="buttons">
-          <motion.button
-            className="add-to-cart"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-          >
-            Add To Cart
-          </motion.button>
-          <motion.button
-            className="buy-now"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-          >
-            Buy Now
-          </motion.button>
-        </div>
-
-        {/* Tabs */}
-        <motion.div
-          className="tabs"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5, duration: 0.8 }}
-        >
-          <motion.div className="tab" whileHover={{ scale: 1.02 }}>
+        {/* Détails avec bouton toggle */}
+        <div className="details-container">
+          <div className="details-header">
             <h3>Details</h3>
-            <p className="product-category">
-              {Array.isArray(findedProduct.details) && findedProduct.details.length > 0 ? (
+            <button
+              className="toggle-button"
+              onClick={() => setShowDetails((prev) => !prev)}
+            >
+              {showDetails ? "−" : "+"}
+            </button>
+          </div>
+          {showDetails && (
+            <div className="details-content">
+              {Array.isArray(findedProduct.details) &&
+              findedProduct.details.length > 0 ? (
                 <ul>
                   {findedProduct.details.map((detail, idx) => (
                     <li key={idx}>
@@ -101,9 +93,9 @@ const ProductDetail = () => {
               ) : (
                 "Il n'a pas de detail "
               )}
-            </p>
-          </motion.div>
-        </motion.div>
+            </div>
+          )}
+        </div>
       </motion.div>
     </div>
   );

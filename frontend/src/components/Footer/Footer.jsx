@@ -29,12 +29,6 @@ function Footer() {
             </a>
           </div>
           <div className="sb-footer-links-div">
-            <h4>Partners</h4>
-            <a href="">
-              <p>Minute Magic</p>
-            </a>
-          </div>
-          <div className="sb-footer-links-div">
             <h4>Contactez-nous</h4>
             <a
               href="https://www.google.com/maps?q=223,+Lot.+Ain+Al+Hayat+1/T501,+R%2B2,+Apt.3,+Skhirat"
@@ -71,7 +65,9 @@ function Footer() {
 
         <div className="sb-footer-below">
           <div className="sb-footer-copyright">
-            <p>@Copyright 2024 Supergros.Tous droits réservés.</p>
+            <p>
+              @Copyright {new Date().getFullYear()} Supergros.Tous droits réservés.
+            </p>
           </div>
         </div>
       </div>

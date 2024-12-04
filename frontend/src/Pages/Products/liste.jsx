@@ -8,15 +8,17 @@ import { FaSearch } from "react-icons/fa";
 const Liste = () => {
   const { data, filteredProducts, setFilteredProducts } = useAppContext();
   const { id } = useParams();
-  const [showNoProductsMessage, setShowNoProductsMessage] = useState(false);
+  const [showNoProductsMessage, setShowNoProductsMessage] = useState(false); // State to manage the "No products exist" message
 
   const inputRef = useRef();
 
   useEffect(() => {
+    // Reset the "No products exist" message whenever the page is updated
     setShowNoProductsMessage(false);
 
+    // Filter and parse JSON details
     const filtered = data
-      .filter((ele) => ele.sssdcat_id == id)
+      .filter((ele) => ele.sssdcat_id == id) // Filter by category ID
       .map((item) => ({
         ...item,
         details:
@@ -27,22 +29,28 @@ const Liste = () => {
 
     setFilteredProducts(filtered);
 
+    // If no products are found, show the "No products exist" message after 2 seconds
     if (filtered.length === 0) {
       const timer = setTimeout(() => {
         setShowNoProductsMessage(true);
       }, 2000);
 
-      return () => clearTimeout(timer);
+      return () => clearTimeout(timer); // Cleanup the timer
     }
   }, [id, data, setFilteredProducts]);
 
   const handleChange = () => {
-    const searchQuery = inputRef.current.value.toLowerCase().trim();
+    const searchQuery = inputRef.current.value;
 
-    if (searchQuery.length === 0) {
+    const filtered = filteredProducts.filter((product) =>
+      product.nom_pro.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    if (searchQuery.length > 0) {
+      setFilteredProducts(filtered);
+    } else
       setFilteredProducts(
         data
-          .filter((ele) => ele.sssdcat_id == id)
+          .filter((ele) => ele.sssdcat_id == id) // Filter by category ID
           .map((item) => ({
             ...item,
             details:
@@ -51,16 +59,13 @@ const Liste = () => {
                 : item.details,
           }))
       );
+
+    // If no products are found after the search filter, show the "No products exist" message
+    if (filtered.length === 0) {
+      setShowNoProductsMessage(true);
+    } else {
       setShowNoProductsMessage(false);
-      return;
     }
-
-    const filtered = filteredProducts.filter((product) =>
-      product.nom_pro.toLowerCase().includes(searchQuery)
-    );
-
-    setFilteredProducts(filtered);
-    setShowNoProductsMessage(filtered.length === 0);
   };
 
   return (
@@ -71,17 +76,26 @@ const Liste = () => {
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            padding: "10px 0",
-            width: "100%",
+            padding: "10px 0", // Optional spacing
+            width: "100%", // Ensure the parent spans the full width
           }}
         >
+          {/* Title and description */}
           <div style={{ flex: 1 }}>
             <h1 className="products-title">Les Produits</h1>
             <p className="products-description">
               Découvrez notre large gamme de produits.
             </p>
           </div>
-          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+
+          {/* Search bar */}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "10px",
+            }}
+          >
             <input
               onChange={handleChange}
               ref={inputRef}
@@ -136,7 +150,8 @@ const Liste = () => {
               </div>
               <h3 className="product-title">{product.nom_pro}</h3>
               <p className="product-category">
-                {Array.isArray(product.details) && product.details.length > 0 ? (
+                {Array.isArray(product.details) &&
+                product.details.length > 0 ? (
                   <ul>
                     {product.details.map((detail, idx) => (
                       <li key={idx}>
@@ -152,7 +167,10 @@ const Liste = () => {
                   "Ils n'a pas de details"
                 )}
               </p>
-              <Link to={`/produit_det/${product.id}`} className="product-button">
+              <Link
+                to={`/produit_det/${product.id}`}
+                className="product-button"
+              >
                 Details
               </Link>
             </motion.div>
@@ -165,9 +183,10 @@ const Liste = () => {
               marginBottom: "20vh",
             }}
           >
-            No products exist.
+            il n'a pas de produit.
           </p>
         ) : (
+          // Display loading placeholders
           [...Array(3)].map((_, index) => (
             <motion.div
               className="product-card"
