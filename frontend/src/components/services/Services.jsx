@@ -1,9 +1,8 @@
 import { motion } from "framer-motion"; // Importer Framer Motion
 import "./Services.css";
 import { sdata } from "../../../public/solutionData";
-
 import { useParams } from "react-router-dom";
-
+// il affiche les services pour le site 
 const Services = () => {
   const { id = 0 } = useParams();
   const services = sdata[id].services;

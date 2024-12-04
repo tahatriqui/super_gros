@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion"; // Import de motion
 import "./About.css";
 import Logo from "../../assets/Transparent.png";
-
+// la page a propos de 
 const About = () => {
   const allArticles = [
     {

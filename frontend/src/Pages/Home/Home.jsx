@@ -52,7 +52,8 @@ const App = () => {
             className="image-section"
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.9 }}
+            style={{ border:'none' }}
           >
             <div className="image-placeholder">
               <span>
@@ -65,7 +66,7 @@ const App = () => {
 
       {/* Autres sections */}
       <ProductsPage />
-<SolutionSection/>
+    <SolutionSection/>
       <ContactSection />
     </>
   );

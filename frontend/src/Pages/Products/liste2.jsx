@@ -4,7 +4,7 @@ import { useAppContext } from "../../AppContext";
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { FaSearch } from "react-icons/fa";
-
+//liste pour sscategories
 const Liste2 = () => {
   const { data, filteredProducts, setFilteredProducts } = useAppContext();
   const { id } = useParams();
@@ -70,11 +70,13 @@ const Liste2 = () => {
           style={{
             display: "flex",
             justifyContent: "space-between",
-            alignItems: "center", // Vertically align items
+            alignItems: "center",
             padding: "10px 0", // Optional spacing
+            width: "100%", // Ensure the parent spans the full width
           }}
         >
-          <div>
+          {/* Title and description */}
+          <div style={{ flex: 1 }}>
             <h1 className="products-title">Les Produits</h1>
             <p className="products-description">
               Découvrez notre large gamme de produits.
@@ -82,7 +84,13 @@ const Liste2 = () => {
           </div>
 
           {/* Search bar */}
-          <div >
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "10px",
+            }}
+          >
             <input
               onChange={handleChange}
               ref={inputRef}
@@ -97,8 +105,7 @@ const Liste2 = () => {
               }}
             />
             <button
-
-            onClick={handleChange}
+              onClick={handleChange}
               style={{
                 background: "white",
                 border: "none",
@@ -138,7 +145,8 @@ const Liste2 = () => {
               </div>
               <h3 className="product-title">{product.nom_pro}</h3>
               <p className="product-category">
-                {Array.isArray(product.details) && product.details.length > 0 ? (
+                {Array.isArray(product.details) &&
+                product.details.length > 0 ? (
                   <ul>
                     {product.details.map((detail, idx) => (
                       <li key={idx}>
@@ -151,16 +159,25 @@ const Liste2 = () => {
                     ))}
                   </ul>
                 ) : (
-                  "No details available"
+                  "Ils n'a pas de details "
                 )}
               </p>
-              <Link to={`/produit_det/${product.id}`} className="product-button">
+              <Link
+                to={`/produit_det/${product.id}`}
+                className="product-button"
+              >
                 Details
               </Link>
             </motion.div>
           ))
         ) : showNoProductsMessage ? (
-          <p style={{ marginLeft: "10vw", marginTop: "20vh", marginBottom: "20vh" }}>
+          <p
+            style={{
+              marginLeft: "10vw",
+              marginTop: "20vh",
+              marginBottom: "20vh",
+            }}
+          >
             No products exist.
           </p>
         ) : (

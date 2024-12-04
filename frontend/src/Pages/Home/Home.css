@@ -87,7 +87,7 @@ body, html {
 }
 
 .btn-secondary:hover {
-  background-color: red;
+  background-color: #CC373B;
   color: white;
 }
 

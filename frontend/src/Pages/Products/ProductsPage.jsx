@@ -1,6 +1,6 @@
 import { motion } from "framer-motion"; // Importation de Framer Motion
 import "./ProductsPage.css"; // Fichier CSS séparé
-
+// produit  section pour la page home
 const ProductsPage = () => {
   return (
     <div className="products-page">

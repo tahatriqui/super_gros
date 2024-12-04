@@ -54,9 +54,9 @@ const ProductDetail = () => {
           <a href="/">Category</a> &gt; 
           {findedProduct?.nom_pro || "Unknown Product"}
         </nav>
-        <h1>{findedProduct?.nom_pro || "Product Not Found"}</h1>
+        <h1>{findedProduct?.nom_pro || "il n'a pas de produit "}</h1>
 
-        <p className="description">{findedProduct?.desc_pro || "No description available"}</p>
+        <p className="description">{findedProduct?.desc_pro || "IL n'a pas de description "}</p>
 
         {/* Buttons */}
         <div className="buttons">
@@ -99,7 +99,7 @@ const ProductDetail = () => {
                   ))}
                 </ul>
               ) : (
-                "No details available"
+                "Il n'a pas de detail "
               )}
             </p>
           </motion.div>

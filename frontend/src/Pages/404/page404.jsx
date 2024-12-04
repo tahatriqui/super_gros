@@ -16,7 +16,7 @@ function Page404() {
    },
    title: {
      fontSize: "4rem",
-     color: "red",
+     color: "#CC373B",
      marginBottom: "20px",
    },
    message: {
@@ -38,7 +38,7 @@ function Page404() {
      boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
    },
    linkHover: {
-     backgroundColor: "red",
+     backgroundColor: "#CC373B",
      boxShadow: "0 6px 12px rgba(0, 0, 0, 0.3)",
    },
  };

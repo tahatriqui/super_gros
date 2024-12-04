@@ -121,12 +121,12 @@ function Nav() {
         : []),
       {
         name: "Nos services",
-        width: "140px",
+        width: "150px",
         subMenu: [
-          { name: "logistique", link: "/Services/0" },
-          { name: "achat", link: "/Services/1" },
-          { name: "transport", link: "/Services/2" },
-          { name: "stockage", link: "/Services/3" },
+          { name: "Logistique", link: "/Services/0" },
+          { name: "Achat", link: "/Services/1" },
+          { name: "Transport", link: "/Services/2" },
+          { name: "Stockage", link: "/Services/3" },
         ],
       },
       {
@@ -144,8 +144,8 @@ function Nav() {
     <div>
       <header className="h-16 text-[15px] fixed inset-0 flex-center bg-[#ffff] z-[9999]">
         <nav className="px-3.5 flex-center-between w-full max-w-7xl mx-auto relative z-[10000]">
-          <Link to={"/"} className="flex-center gap-x-3 z-[10001] relative ">
-            <img src={Logo} alt="Logo" className="size-10 w-[90px]" />
+          <Link to={"/"} className="flex-center gap-x-3 z-[10020] relative ">
+            <img src={Logo} alt="Logo" className="w-[auto] h-[60px]" />
           </Link>
 
           <ul className="hidden gap-x-1 lg:flex-center">

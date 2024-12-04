@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion"; // Pour les animations
 import "./ContactSection.css"; // Fichier CSS séparé
-
+// contact section pour la page home
 const ContactSection = () => {
   return (
     <div className="contact-section" id="contact">

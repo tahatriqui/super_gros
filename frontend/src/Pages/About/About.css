@@ -26,7 +26,7 @@ body{
   font-size: 30px;
   font-weight: bold;
   margin-bottom: 10px;
-  color: red;
+  color: #CC373B;
  
 }
 
@@ -58,7 +58,7 @@ body{
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 15px;
-  color: red;
+  color: #CC373B;
 }
 
 .about-text {
@@ -94,7 +94,7 @@ body{
 .articles-title {
   font-size: 28px;
   font-weight: bold;
-  color: red;
+  color: #CC373B;
 
 }
 
@@ -140,7 +140,7 @@ body{
 .article-title {
   font-size: 18px;
   font-weight: bold;
-  color: red;
+  color: #CC373B;
   margin-bottom: 15px;
   
 }

@@ -6,7 +6,7 @@ import "./Products.css";
 import { useAppContext } from "../../AppContext";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-
+// il affiche ssscategories qui est cliquer dans la page Products  
 function Sproducts() {
   const { ssscategories} = useAppContext();
   const [filter, setFilter] = useState([]);
@@ -98,7 +98,7 @@ function Sproducts() {
                 <h2 className="product-name">{product.nom_ssscat}</h2>
                 <p className="product-desc">{product.desc}</p>
                 <Link to={`/liste_pro/${product.id}`} className="details-btn">
-                  les produit
+                  les produits
                 </Link>
               </div>
             </div>

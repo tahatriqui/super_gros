@@ -8,24 +8,34 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 function Products() {
-  const { sscategories, categories } = useAppContext();
+  const { sscategories } = useAppContext();
   const [filter, setFilter] = useState([]);
   const navigate = useNavigate();
   const { id, name } = useParams();
-
   const [isLoaded, setIsLoaded] = useState(false);
- 
 
   // Custom Previous Arrow
   const PrevArrow = ({ onClick }) => (
-    <div className="arrow prev-arrow" onClick={onClick}>
+    <div
+      className="arrow prev-arrow"
+      onClick={(e) => {
+        e.stopPropagation(); // Prevent event bubbling
+        onClick(); // Call the slick slider's onClick
+      }}
+    >
       <FaChevronLeft size={25} />
     </div>
   );
 
   // Custom Next Arrow
   const NextArrow = ({ onClick }) => (
-    <div className="arrow next-arrow" onClick={onClick}>
+    <div
+      className="arrow next-arrow"
+      onClick={(e) => {
+        e.stopPropagation(); // Prevent event bubbling
+        onClick(); // Call the slick slider's onClick
+      }}
+    >
       <FaChevronRight size={25} />
     </div>
   );
@@ -55,60 +65,63 @@ function Products() {
     ],
   };
 
- useEffect(() => {
-  // Make sure the sscategories are loaded before proceeding
-  if (sscategories.length > 0) {
-    const filtered = sscategories.filter((e) => e.scat_id == id);
-    setFilter(filtered);
+  useEffect(() => {
+    if (sscategories.length > 0) {
+      const filtered = sscategories.filter((e) => e.scat_id == id);
+      setFilter(filtered);
 
-    // If no category is found, redirect to home
-    if (filtered.length === 0) {
-      navigate(`/`);
-    } else {
-      setIsLoaded(true);  // Trigger the animation when data is loaded
+      if (filtered.length === 0) {
+        navigate(`/`); // Redirect to home if no category found
+      } else {
+        setIsLoaded(true); // Data loaded
+      }
     }
-  }
-}, [id, sscategories, navigate]);
+  }, [id, sscategories, navigate]);
 
   return (
     <div className="products-container">
-      {/* Header Section */}
-      <div className="products-header">
-        <div>
-          <h1 className="products-title">{name}</h1>
-          <p className="products-description">
-            Découvrez notre large gamme de categories.
-          </p>
-        </div>
-      </div>
+      {!isLoaded ? (
+        <div className="loading-indicator">Chargement en cours...</div>
+      ) : (
+        <>
+          {/* Header Section */}
+          <div className="products-header">
+            <h1 className="products-title">{name}</h1>
+            <p className="products-description">
+              Découvrez notre large gamme de catégories.
+            </p>
+          </div>
 
-      {/* Slider Section */}
-      <section className="products-slider">
-        <Slider {...sliderSettings}>
-          {filter.map((product) => (
-            <div
-              key={product.id}
-              className={`product-card ${isLoaded ? "fade-in" : ""}`}
-            >
-              <div className="product-card-content">
-                <img
-                  src="https://www.groupe-premium.com/socopim/wp-content/uploads/2022/02/123-300x162.png"
-                  alt={product.nom_scat}
-                  className="product-image"
-                />
-                <h2 className="product-name">{product.nom_scat}</h2>
-                <p className="product-desc">{product.desc}</p>
-                <Link
-                  to={`/sproduct/${product.id}/${product.nom_scat}`}
-                  className="details-btn"
+          {/* Slider Section */}
+          <section className="products-slider">
+            <Slider {...sliderSettings}>
+              {filter.map((product) => (
+                <div
+                  key={product.id}
+                  className={`product-card ${isLoaded ? "fade-in" : ""}`}
                 >
-                  voir plus
-                </Link>
-              </div>
-            </div>
-          ))}
-        </Slider>
-      </section>
+                  <div className="product-card-content">
+                    <img
+                      src="https://www.groupe-premium.com/socopim/wp-content/uploads/2022/02/123-300x162.png"
+                      alt={product.nom_scat}
+                      className="product-image"
+                      onError={(e) => (e.target.src = "/default-image.jpg")} // Fallback image
+                    />
+                    <h2 className="product-name">{product.nom_scat}</h2>
+                    <p className="product-desc">{product.desc}</p>
+                    <Link
+                      to={`/sproduct/${product.id}/${product.nom_scat}`}
+                      className="details-btn"
+                    >
+                      Voir plus
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </Slider>
+          </section>
+        </>
+      )}
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion"; // Importation de Framer Motion
 import "./SolutionsSection.css";
-
+// solution  section pour la page home
 const SolutionsSection = () => {
   return (
     <div className="section">
