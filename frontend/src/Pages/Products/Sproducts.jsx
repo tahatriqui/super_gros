@@ -97,7 +97,7 @@ function Sproducts() {
                 <h2 className="product-name">{product.nom_ssscat}</h2>
                 <p className="product-desc">{product.desc}</p>
                 <Link to={`/liste_pro/${product.id}`} className="details-btn">
-                  Les produits
+                  Les categories
                 </Link>
               </div>
             </div>

@@ -304,3 +304,136 @@ align-items: left; /* Centrer les boutons */
   font-size: 20px;
   color: #555;
 }
+.tabs-navigation {
+  display: flex;
+  margin-top: 20px;
+}
+
+.tab-button {
+  flex: 1;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  background-color: #f5f5f5;
+  color: #333;
+  font-size: 16px;
+  text-align: center;
+  outline: none;
+}
+
+.tab-button.active {
+  background-color: #CC373B;
+  color: white;
+}
+
+.tabs-content {
+  margin-top: 20px;
+}
+
+
+.points-de-vente,
+.parametres-section {
+  margin-top: 30px;
+}
+
+.parametres-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.parametres-table th,
+.parametres-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+h2 {
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+}
+/* Styles généraux pour les sections ajoutées */
+.product-parameters {
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f9f9f9; /* Couleur de fond légère */
+  border: 1px solid #ddd; /* Bordure fine */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre douce */
+}
+
+.product-parameters h2 {
+  font-size: 1.5rem;
+  color: #333; /* Couleur sombre pour le texte */
+  margin-bottom: 15px;
+  border-bottom: 2px solid #CC373B; /* Ligne orange sous le titre */
+  padding-bottom: 5px;
+}
+
+/* Points De Vente Des Produits */
+.product-sales-points ul {
+  list-style: disc inside; /* Puces à l'intérieur */
+  padding: 0;
+  margin: 0;
+  color: #555; /* Couleur neutre pour le texte */
+}
+
+.product-sales-points ul li {
+  margin-bottom: 10px; /* Espacement entre les items */
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Conteneur du tableau */
+.table-container {
+  margin: 20px auto;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow-x: auto; /* Pour les écrans petits */
+}
+
+/* Tableau */
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0;
+}
+
+.custom-table th {
+  background-color: #CC373B; /* Orange vif */
+  color: #fff; /* Texte blanc */
+  text-align: left;
+  padding: 12px;
+  font-size: 1rem;
+  text-transform: uppercase; /* Texte en majuscules */
+  border-right: 1px solid #fff; /* Séparation entre colonnes */
+}
+
+.custom-table th:last-child {
+  border-right: none; /* Pas de bordure pour la dernière colonne */
+}
+
+.custom-table td {
+  padding: 12px;
+  color: #555; /* Texte neutre */
+  font-size: 0.95rem;
+  border-bottom: 1px solid #ddd; /* Ligne entre les cellules */
+}
+
+.custom-table tr:nth-child(even) {
+  background-color: #f9f9f9; /* Fond alterné pour les lignes */
+}
+
+
+
+/* Style pour texte vide (si aucun paramètre) */
+.no-data {
+  text-align: center;
+  font-size: 1rem;
+  color: #999; /* Texte gris clair */
+  padding: 20px;
+}
+

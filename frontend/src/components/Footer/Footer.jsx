@@ -2,7 +2,12 @@ import "./Footer.css";
 import { Facebook } from "lucide-react";
 import { Instagram } from "lucide-react";
 import { Linkedin } from "lucide-react";
+import { useAppContext } from "../../AppContext";
+import { Link } from "react-router-dom";
+
 function Footer() {
+
+  const {categories} =  useAppContext();
   return (
     <div id="footer" className="footer">
       <div className="sb-footer-section-padding">
@@ -17,16 +22,16 @@ function Footer() {
             </p>
           </div>
           <div className="sb-footer-links-div">
-            <h4>Resources</h4>
-            <a href="">
-              <p>Resources Center</p>
-            </a>
-            <a href="">
-              <p>Testimonials</p>
-            </a>
-            <a href="">
-              <p>STV</p>
-            </a>
+            <h4>Les categories</h4>
+           {categories?.map((e,i)=>{
+            return (
+              <>
+                <Link key={i}  >
+                  <p>{e.nom_cat}</p>
+                </Link>
+              </>
+            );
+           })}
           </div>
           <div className="sb-footer-links-div">
             <h4>Contactez-nous</h4>

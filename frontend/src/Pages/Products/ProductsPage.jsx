@@ -37,8 +37,8 @@ const ProductsPage = () => {
           <div className="icon">⚙️</div>
           <h3>Équipements spéciaux pour des missions spécifiques</h3>
           <p>
-            Découvrez les équipements pour la lutte contre l'incendie et les
-            interventions d'urgence.
+            Découvrez les équipements pour la lutte contre l&apos;incendie et les
+            interventions d&apos;urgence.
           </p>
         </motion.div>
 

@@ -18,18 +18,18 @@ export default function App() {
       <AppProvider>
         <BrowserRouter>
           <Nav />
-          <Routes>
-            <Route path={"/"} element={<Home />} />
-            <Route path={"/about"} element={<About />} />
-            <Route path={"/sproduct/:id/:name"} element={<Sproducts />} />
-            <Route path={"/product/:id/:name"} element={<Products />} />
-            <Route path={"/produit_det/:did"} element={<Product_detail />} />
-            <Route path={"/liste_pro/:id"} element={<Liste />} />
-            <Route path={"/liste2/:id"} element={<Liste2 />} />
-            <Route path={"/Services/:id"} element={<Services />} />
-            {/* Catch-all route pour afficher la page 404 */}
-            <Route path="*" element={<Page404 />} />
-          </Routes>
+            <Routes>  
+              <Route path={"/"} element={<Home />} />
+              <Route path={"/about"} element={<About />} />
+              <Route path={"/sproduct/:id/:name"} element={<Sproducts />} />
+              <Route path={"/product/:id/:name"} element={<Products />} />
+              <Route path={"/produit_det/:did"} element={<Product_detail />} />
+              <Route path={"/liste_pro/:id"} element={<Liste />} />
+              <Route path={"/liste2/:id"} element={<Liste2 />} />
+              <Route path={"/Services/:id"} element={<Services />} />
+              {/* Catch-all route pour afficher la page 404 */}
+              <Route path="*" element={<Page404 />} />
+            </Routes>
           <Footer />
         </BrowserRouter>
       </AppProvider>
