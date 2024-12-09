@@ -10,8 +10,6 @@ import { useAppContext } from "../../AppContext";
 
 function Nav() {
   const {
-    solutionId,
-    SetSolutionId,
     sscategories,
     setSSCategories,
     categories,
@@ -65,7 +63,7 @@ function Nav() {
     getSCategory();
     getSSCategory();
     getSSSCategory();
-  }, [scategories]);
+  }, []);
 
   useEffect(() => {
     setMenus([
@@ -87,10 +85,10 @@ function Nav() {
                       if (el.categorie_id === e.id) {
                         return {
                           name: el.nom_scat,
-                          link: `product/${el.id}/${el.nom_scat}`,
+                          link: `liste_pro/${el.id}`,
                           subMenu: sscategories
                             .map((ele) => {
-                              if (ele.sscat_id === el.id) {
+                              if (ele.scat_id === el.id) {
                                 return {
                                   name: ele.nom_scat,
                                   id: ele.id,

@@ -12,6 +12,7 @@ export const AppProvider = ({ children }) => {
    const [categories, setCategories] = useState([]);
  const [ssscategories, setSSsCategories] = useState([]);
   const [solutionId,SetSolutionId] = useState(0)
+   const [filteredCategory, setFilterdCategory] = useState([]);
 
   const getProduct = async ()  =>{
     const res =  await axios.get(`${api}/produit`)
@@ -19,7 +20,7 @@ export const AppProvider = ({ children }) => {
   }
   useEffect(()=>{getProduct()},[])
   return (
-    <AppContext.Provider value={{ solutionId,SetSolutionId,data, setData,filteredProducts,setFilteredProducts,sscategories, setSSCategories,categories, setCategories,ssscategories, setSSsCategories }}>
+    <AppContext.Provider value={{filteredCategory, setFilterdCategory, solutionId,SetSolutionId,data, setData,filteredProducts,setFilteredProducts,sscategories, setSSCategories,categories, setCategories,ssscategories, setSSsCategories }}>
       {children}
     </AppContext.Provider>
   );

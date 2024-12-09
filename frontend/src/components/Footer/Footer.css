@@ -2,10 +2,15 @@
     padding: 2rem 2rem;
    
 }
+
 .footer{
     background-color:white;
     display: flex;
   flex-direction: column;
+ 
+margin-top:50vh
+
+
 }
 .sb-footer{
     display: flex;

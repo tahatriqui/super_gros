@@ -3,218 +3,317 @@ import "./liste.css";
 import { useAppContext } from "../../AppContext";
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
-import { FaSearch } from "react-icons/fa";
-//liste pour ssscategories
+import { FaChevronDown, FaSearch } from "react-icons/fa";
+
 const Liste = () => {
-  const { data, filteredProducts, setFilteredProducts } = useAppContext();
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedSubCategory, setSelectedSubCategory] = useState(null);
+  const [showNoProductsMessage, setShowNoProductsMessage] = useState(false);
+
+  const { data,filteredProducts, setFilteredProducts, sscategories, ssscategories, filteredCategory, setFilterdCategory } = useAppContext();
+
+  const [oldP, setOldP] = useState([]);
   const { id } = useParams();
-  const [showNoProductsMessage, setShowNoProductsMessage] = useState(false); // State to manage the "No products exist" message
-
   const inputRef = useRef();
-
+  
+  // Filter categories based on the selected ID
   useEffect(() => {
-    // Reset the "No products exist" message whenever the page is updated
+    const filteredCat = sscategories
+      .filter((e) => String(e.scat_id) === String(id))
+      .map((item) => ({
+        ...item,
+        count: data.filter((el) => el.sscat_id === item.id).length,
+        subCategories: ssscategories
+          .filter((sscat) => sscat.sscat_id === item.id)
+          .map((sscat) => ({
+            name: sscat.nom_ssscat,
+            id: sscat.id,
+            count: data.filter((el) => el.sssdcat_id === sscat.id).length,
+          })),
+      }));
+
+    setFilterdCategory(filteredCat);
+  }, [id, sscategories, data, setFilterdCategory, ssscategories]);
+
+  // Fetch and filter products based on category ID
+  useEffect(() => {
     setShowNoProductsMessage(false);
 
-    // Filter and parse JSON details
     const filtered = data
-      .filter((ele) => ele.sssdcat_id == id) // Filter by category ID
+      .filter((item) => item.sssdcat_id === id)
       .map((item) => ({
         ...item,
         details:
           typeof item.details === "string"
-            ? JSON.parse(item.details)
+            ? (() => {
+                try {
+                  return JSON.parse(item.details);
+                } catch {
+                  console.error("Failed to parse details for product:", item);
+                  return {};
+                }
+              })()
             : item.details,
       }));
 
     setFilteredProducts(filtered);
+    setOldP(filtered);
 
-    // If no products are found, show the "No products exist" message after 2 seconds
     if (filtered.length === 0) {
       const timer = setTimeout(() => {
         setShowNoProductsMessage(true);
       }, 2000);
 
-      return () => clearTimeout(timer); // Cleanup the timer
+      return () => clearTimeout(timer);
     }
   }, [id, data, setFilteredProducts]);
 
-  const handleChange = () => {
-    const searchQuery = inputRef.current.value;
-
-    const filtered = filteredProducts.filter((product) =>
-      product.nom_pro.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-    if (searchQuery.length > 0) {
-      setFilteredProducts(filtered);
-    } else
-      setFilteredProducts(
-        data
-          .filter((ele) => ele.sssdcat_id == id) // Filter by category ID
-          .map((item) => ({
-            ...item,
-            details:
-              typeof item.details === "string"
-                ? JSON.parse(item.details)
-                : item.details,
-          }))
+  // Filter products based on selected subcategory
+  useEffect(() => {
+    if (selectedSubCategory) {
+      const filtered = data.filter(
+        (item) =>
+          item.sssdcat_id === id &&
+          item.subCategory === selectedSubCategory.name
       );
 
-    // If no products are found after the search filter, show the "No products exist" message
-    if (filtered.length === 0) {
-      setShowNoProductsMessage(true);
-    } else {
-      setShowNoProductsMessage(false);
+      setFilteredProducts(filtered);
+      setShowNoProductsMessage(filtered.length === 0);
     }
-  };
+  }, [selectedSubCategory, id, data, setFilteredProducts]);
+
+  // Handle search input
+const handleSearchChange = () => {
+  const searchQuery = inputRef.current.value.toLowerCase();
+
+  if (searchQuery.length > 0) {
+    // Filter only within the current filtered products (oldP)
+    const searchResults = oldP.filter((product) =>
+      product.nom_pro.toLowerCase().includes(searchQuery)
+    );
+
+    setFilteredProducts(searchResults);
+    setShowNoProductsMessage(searchResults.length === 0);
+  } else {
+    // Reset to the previously filtered products when the search is cleared
+    setFilteredProducts(oldP);
+    setShowNoProductsMessage(false);
+  }
+};
+
+
+
+  useEffect(() => {
+  if (!selectedSubCategory) return;
+
+  const filtered = data
+    .filter((item) => item.sssdcat_id === selectedSubCategory.id)
+    .map((item) => ({
+      ...item,
+      details:
+        typeof item.details === "string"
+          ? (() => {
+              try {
+                return JSON.parse(item.details);
+              } catch {
+                console.error("Failed to parse details for product:", item);
+                return {};
+              }
+            })()
+          : item.details,
+    }));
+   
+  setFilteredProducts(filtered);
+  setShowNoProductsMessage(filtered.length === 0);
+}, [selectedSubCategory, data]);
+
 
   return (
-    <div className="products-container">
-      <div className="products-header">
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            padding: "10px 0", // Optional spacing
-            width: "100%", // Ensure the parent spans the full width
-          }}
-        >
-          {/* Title and description */}
-          <div style={{ flex: 1 }}>
-            <h1 className="products-title">Les Produits</h1>
-            <p className="products-description">
-              Découvrez notre large gamme de produits.
-            </p>
-          </div>
+    <div className="app" >
+      {/* Sidebar */}
+      <aside className="sidebar">
+        <h2 className="sidebar-title">Catégories</h2>
+        <ul className="sidebar-list">
+          {filteredCategory?.map((category, index) => (
+            <li key={index}>
+              <div
+                className={`sidebar-item ${
+                  selectedCategory === category.nom_scat ? "active" : ""
+                }`}
+                onClick={() => {
+                  setSelectedCategory(
+                    selectedCategory === category.nom_scat
+                      ? null
+                      : category.nom_scat
+                  );
 
-          {/* Search bar */}
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "10px",
-            }}
-          >
-            <input
-              onChange={handleChange}
-              ref={inputRef}
-              type="text"
-              placeholder="Search..."
-              style={{
-                padding: "8px 12px",
-                border: "1px solid #ccc",
-                borderRadius: "5px",
-                outline: "none",
-                fontSize: "14px",
-              }}
-            />
-            <button
-              onClick={handleChange}
-              style={{
-                background: "white",
-                border: "none",
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <FaSearch
-                style={{
-                  width: "20px",
-                  height: "20px",
-                  color: "red",
+                  if (category.count > 0) {
+                    const filteredProducts = data
+                      .filter((e) => e.sscat_id === category.id)
+                      .map((item) => ({
+                        ...item,
+                        details:
+                          typeof item.details === "string"
+                            ? (() => {
+                                try {
+                                  return JSON.parse(item.details);
+                                } catch {
+                                  console.error("Failed to parse details for product:", item);
+                                  return {};
+                                }
+                              })()
+                            : item.details,
+                      }));
+
+                    setOldP(filteredProducts);
+                    setFilteredProducts(filteredProducts);
+                  }
                 }}
-              />
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div className="products-grid">
-        {filteredProducts.length > 0 ? (
-          filteredProducts.map((product, index) => (
-            <motion.div
-              className="product-card"
-              key={product.id}
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.2, duration: 0.5 }}
-            >
-              <div className="product-image-placeholder">
-                <img
-                  src="https://www.groupe-premium.com/socopim/wp-content/uploads/2022/02/123-300x162.png"
-                  alt={product.nom_pro}
-                />
+              >
+                {category.nom_scat}{" "}
+                <span className="category-count">
+                  {category.count > 0 ? category.count : <FaChevronDown />}
+                </span>
               </div>
-              <h3 className="product-title">{product.nom_pro}</h3>
-              <p className="product-category">
-                {Array.isArray(product.details) &&
-                product.details.length > 0 ? (
-                  <ul>
-                    {product.details.map((detail, idx) => (
-                      <li key={idx}>
-                        {Object.entries(detail).map(([key, value]) => (
-                          <div key={key}>
-                            <strong>{key}:</strong> {value}
-                          </div>
-                        ))}
+
+              {selectedCategory === category.nom_scat && (
+                <div className="subcategories">
+                  <ul className="subcategories-list">
+                    {category.subCategories.map((subCategory, subIndex) => (
+                      <li
+                        key={subIndex}
+                        className={`subcategory-item ${
+                          selectedSubCategory?.name === subCategory.name
+                            ? "active"
+                            : ""
+                        }`}
+                      onClick={() => {
+  // Set the selected subcategory
+  setSelectedSubCategory(subCategory);
+
+  // Filter products immediately
+  const filtered = data
+    .filter((item) => item.sssdcat_id === subCategory.id)
+    .map((item) => ({
+      ...item,
+      details:
+        typeof item.details === "string"
+          ? (() => {
+              try {
+                return JSON.parse(item.details);
+              } catch {
+                console.error("Failed to parse details for product:", item);
+                return {};
+              }
+            })()
+          : item.details,
+    }));
+
+  // Update the filtered products and oldP
+  setFilteredProducts(filtered);
+  setOldP(filtered);
+
+  // Update "no products" message
+  setShowNoProductsMessage(filtered.length === 0);
+}}
+
+
+                      >
+                        {subCategory.name}
+                        <span className="category-count">
+                          {subCategory.count}
+                        </span>
                       </li>
                     ))}
                   </ul>
-                ) : (
-                  "Ils n'a pas de details"
-                )}
-              </p>
-              <Link
-                to={`/produit_det/${product.id}`}
-                className="product-button"
+                </div>
+              )}
+            </li>
+          ))}
+        </ul>
+      </aside>
+
+      {/* Main Content */}
+      <main className="main-content" style={{ marginBottom:'180px' }}>
+        <header className="header">
+          <h1>Nos Produits</h1>
+
+          {/* Search Bar */}
+          <div className="search-bar">
+            <input
+              type="text"
+              placeholder="Rechercher un produit..."
+              ref={inputRef}
+              onChange={handleSearchChange}
+              className="search-input"
+            />
+            <button onClick={handleSearchChange} className="search-button">
+              <FaSearch />
+            </button>
+          </div>
+        </header>
+
+        {/* Products Grid */}
+        <div className="products-grid">
+          {filteredProducts?.length > 0 ? (
+            filteredProducts.map((product, index) => (
+              <motion.div
+                key={product.id}
+                className="product-card"
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.2, duration: 0.5 }}
               >
-                Details
-              </Link>
-            </motion.div>
-          ))
-        ) : showNoProductsMessage ? (
-          <p
-            style={{
-              marginLeft: "10vw",
-              marginTop: "20vh",
-              marginBottom: "20vh",
-            }}
-          >
-            il n'a pas de produit.
-          </p>
-        ) : (
-          // Display loading placeholders
-          [...Array(3)].map((_, index) => (
-            <motion.div
-              className="product-card"
-              key={index}
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-            >
-              <div className="product-image-placeholder">
-                <img src="/loading.gif" alt="Loading..." />
-              </div>
-              <h3 className="product-title">loading...</h3>
-              <p className="product-category">
-                <ul>
-                  <li>
-                    <div>
-                      <strong>Poids :</strong> loading...
-                    </div>
-                    <div>
-                      <strong>loading :</strong> loading...
-                    </div>
-                  </li>
-                </ul>
-              </p>
-              <a className="product-button">Details</a>
-            </motion.div>
-          ))
-        )}
-      </div>
+                <div className="product-image">
+                  <img
+                    src="https://via.placeholder.com/150"
+                    alt={product.nom_pro}
+                    className="product-image"
+                  />
+                </div>
+                <h3 className="product-title">{product.nom_pro}</h3>
+                <div className="product-category">
+                  {product.details
+                    ? Array.isArray(product.details) &&
+                      product.details.length > 0
+                      ? product.details.map((detail, idx) => (
+                          <div key={idx}>
+                            {Object.entries(detail).map(([key, value]) => (
+                              <div key={key}>
+                                <strong>{key}:</strong> {value}
+                              </div>
+                            ))}
+                          </div>
+                        ))
+                      : typeof product.details === "object"
+                      ? Object.entries(product.details).map(([key, value]) => (
+                          <div key={key}>
+                            <strong>{key}:</strong> {value}
+                          </div>
+                        ))
+                      : "Aucun détail disponible"
+                    : "Détails non fournis pour ce produit"}
+                </div>
+                <Link to={`/produit_det/${product.id}`} className="product-button">
+                  Détails
+                </Link>
+              </motion.div>
+            ))
+          ) : showNoProductsMessage ? (
+            <p className="no-products-message">Aucun produit disponible.</p>
+          ) : (
+            [...Array(3)].map((_, index) => (
+              <motion.div
+                key={index}
+                className="loading-placeholder"
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5 }}
+              />
+            ))
+          )}
+        </div>
+      </main>
     </div>
   );
 };

@@ -23,3 +23,7 @@ body {
     @apply flex items-center justify-between;
   }
 }
+
+html, body, #root {
+  height: 100%;
+}
