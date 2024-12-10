@@ -3,14 +3,10 @@
    
 }
 
+
 .footer{
     background-color:white;
-    display: flex;
-  flex-direction: column;
- 
-margin-top:50vh
-
-
+    margin-top:auto
 }
 .sb-footer{
     display: flex;

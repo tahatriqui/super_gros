@@ -6,9 +6,12 @@ export default {
       fontFamily: {
         inter: ["Inter", "sans-serif"],
       },
+      screens: {
+        "xl-custom": "1400px", // Custom breakpoint
+      },
     },
+    // Define your standard breakpoints here (optional)
     screens: {
-      // => @media (max-width: 1279px) { ... }
       lg: { min: "925px" },
     },
   },

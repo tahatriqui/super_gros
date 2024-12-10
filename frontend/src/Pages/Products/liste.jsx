@@ -10,7 +10,7 @@ const Liste = () => {
   const [selectedSubCategory, setSelectedSubCategory] = useState(null);
   const [showNoProductsMessage, setShowNoProductsMessage] = useState(false);
 
-  const { data,filteredProducts, setFilteredProducts, sscategories, ssscategories, filteredCategory, setFilterdCategory } = useAppContext();
+  const {vh,setVh, data,filteredProducts, setFilteredProducts, sscategories, ssscategories, filteredCategory, setFilterdCategory } = useAppContext();
 
   const [oldP, setOldP] = useState([]);
   const { id } = useParams();
@@ -146,7 +146,8 @@ const handleSearchChange = () => {
                       ? null
                       : category.nom_scat
                   );
-
+                  if(category.count>0){
+                  setVh(category.count * 16)}
                   if (category.count > 0) {
                     const filteredProducts = data
                       .filter((e) => e.sscat_id === category.id)
@@ -190,7 +191,8 @@ const handleSearchChange = () => {
                       onClick={() => {
   // Set the selected subcategory
   setSelectedSubCategory(subCategory);
-
+  if(subCategory.count>0){
+ setVh(subCategory.count * 16 )}
   // Filter products immediately
   const filtered = data
     .filter((item) => item.sssdcat_id === subCategory.id)

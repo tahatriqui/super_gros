@@ -4,7 +4,7 @@ import "./ProductsPage.css"; // Fichier CSS séparé
 const ProductsPage = () => {
   return (
     <div className="products-page">
-      <div className="header">
+      <div className="headerr">
         <h2>Découvrez notre large gamme de produits</h2>
         <p>
           Nous offrons une variété d'équipements lourds et de véhicules adaptés

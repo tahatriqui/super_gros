@@ -20,16 +20,16 @@ h1, h2, h3, p {
 
 /* Sidebar */
 .sidebar {
-  position: sticky;
-  height: calc(100vh - 150px); /* Hauteur de la sidebar ajustée */
-  overflow-y: auto;
-   left: 50px;
-  top: 100px; /* Légère distance du bord supérieur */
-  width: 370px;
-  scrollbar-width: thin;
-  background:white;
-  padding:15px 8px;
-  border-radius:5px
+    position: sticky;
+    overflow-y: auto;
+    left: 50px;
+    top: 100px;
+    width: 385px;
+    scrollbar-width: thin;
+    background: white;
+    padding: 15px 8px;
+    border-radius: 5px;
+    height: 90vh;
 }
 
 .sidebar-title {

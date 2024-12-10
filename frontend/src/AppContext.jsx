@@ -13,14 +13,14 @@ export const AppProvider = ({ children }) => {
  const [ssscategories, setSSsCategories] = useState([]);
   const [solutionId,SetSolutionId] = useState(0)
    const [filteredCategory, setFilterdCategory] = useState([]);
-
+  const [vh,setVh] = useState(14)
   const getProduct = async ()  =>{
     const res =  await axios.get(`${api}/produit`)
     setData(res.data);
   }
   useEffect(()=>{getProduct()},[])
   return (
-    <AppContext.Provider value={{filteredCategory, setFilterdCategory, solutionId,SetSolutionId,data, setData,filteredProducts,setFilteredProducts,sscategories, setSSCategories,categories, setCategories,ssscategories, setSSsCategories }}>
+    <AppContext.Provider value={{vh,setVh,filteredCategory, setFilterdCategory, solutionId,SetSolutionId,data, setData,filteredProducts,setFilteredProducts,sscategories, setSSCategories,categories, setCategories,ssscategories, setSSsCategories }}>
       {children}
     </AppContext.Provider>
   );
