@@ -11,6 +11,7 @@ import { AppProvider } from './AppContext.jsx';
 import Products from './Pages/Products/Products.jsx';
 import Sproducts from './Pages/Products/SProducts.jsx';
 import Services from "./components/services/Services.jsx";
+import ScrollToTop from './components/SrollTop.jsx';
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
       <AppProvider>
         <BrowserRouter>
           <Nav />
+          <ScrollToTop/>
             <Routes>  
               <Route path={"/"} element={<Home />} />
               <Route path={"/about"} element={<About />} />
