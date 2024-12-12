@@ -10,7 +10,7 @@ const Liste = () => {
   const [selectedSubCategory, setSelectedSubCategory] = useState(null);
   const [showNoProductsMessage, setShowNoProductsMessage] = useState(false);
 
-  const {vh,setVh, data,filteredProducts, setFilteredProducts, sscategories, ssscategories, filteredCategory, setFilterdCategory } = useAppContext();
+  const {setVh, data,filteredProducts, setFilteredProducts, sscategories, ssscategories, filteredCategory, setFilterdCategory } = useAppContext();
 
   const [oldP, setOldP] = useState([]);
   const { id } = useParams();

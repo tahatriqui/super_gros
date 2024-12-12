@@ -133,7 +133,7 @@ function Nav() {
       },
       {
         name: "Contact",
-        link: "/#contact",
+        link: "#contact",
       },
     ]);
   }, [categories, scategories, sscategories]);

@@ -91,13 +91,13 @@ export default function DesktopMenu({ menu }) {
       <motion.li className="relative group" key={menu.name} ref={menuRef}>
         {/* Main Menu Item */}
         {menu.link ? (
-          <Link
-            to={menu.link}
+          <a
+            href={menu.link}
             className="flex items-center gap-2 px-4 py-2 transition-all duration-300 ease-in-out transform rounded-lg cursor-pointer hover:bg-gray-200 hover:scale-105"
           >
             {menu.name}
             {menu.subMenu?.length > 0 && <ChevronDown />}
-          </Link>
+          </a>
         ) : (
           <div
             className="flex items-center gap-2 px-4 py-2 transition-all duration-300 ease-in-out transform rounded-lg cursor-pointer hover:bg-gray-200 hover:scale-105"

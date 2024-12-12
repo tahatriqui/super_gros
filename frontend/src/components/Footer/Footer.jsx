@@ -3,14 +3,27 @@ import { Facebook } from "lucide-react";
 import { Instagram } from "lucide-react";
 import { Linkedin } from "lucide-react";
 import { useAppContext } from "../../AppContext";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-function Footer({vh}) {
-  console.log(typeof(vh));
-  
 
-  const {categories} =  useAppContext();
+function Footer({vh}) {
+  
+  const location = useLocation();
+  const {categories,setVh} =  useAppContext();
+   useEffect(() => {
+    
+    
+    // For example, adjust footer margin based on the route
+    if (location.pathname == '/') {
+      setVh(10)
+    }  else {
+       setVh(10)
+    }
+  }, [location]); // Re-run the effect whenever location changes
+
+
+
  const [deviceType, setDeviceType] = useState('');
 
   // Function to determine the device type based on window width
@@ -22,7 +35,7 @@ function Footer({vh}) {
       setDeviceType('tablet'); // Tablet (medium devices)
       
     }else if (width <= 1440) {
-      setDeviceType('mac'); // Tablet (medium devices)
+      setDeviceType('mac'); // mac
       
     } else {
       setDeviceType('pc'); // PC (large devices)
