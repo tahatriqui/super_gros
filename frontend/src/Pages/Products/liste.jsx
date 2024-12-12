@@ -176,7 +176,6 @@ const handleSearchChange = () => {
                   {category.count > 0 ? category.count : <FaChevronDown />}
                 </span>
               </div>
-
               {selectedCategory === category.nom_scat && (
                 <div className="subcategories">
                   <ul className="subcategories-list">
@@ -189,37 +188,33 @@ const handleSearchChange = () => {
                             : ""
                         }`}
                       onClick={() => {
-  // Set the selected subcategory
-  setSelectedSubCategory(subCategory);
-  if(subCategory.count>0){
- setVh(subCategory.count * 16 )}
-  // Filter products immediately
-  const filtered = data
-    .filter((item) => item.sssdcat_id === subCategory.id)
-    .map((item) => ({
-      ...item,
-      details:
-        typeof item.details === "string"
-          ? (() => {
-              try {
-                return JSON.parse(item.details);
-              } catch {
-                console.error("Failed to parse details for product:", item);
-                return {};
-              }
-            })()
-          : item.details,
-    }));
-
-  // Update the filtered products and oldP
-  setFilteredProducts(filtered);
-  setOldP(filtered);
-
-  // Update "no products" message
-  setShowNoProductsMessage(filtered.length === 0);
-}}
-
-
+                      // Set the selected subcategory
+                      setSelectedSubCategory(subCategory);
+                      if(subCategory.count>0){
+                    setVh(subCategory.count * 16 )}
+                      // Filter products immediately
+                      const filtered = data
+                        .filter((item) => item.sssdcat_id === subCategory.id)
+                        .map((item) => ({
+                          ...item,
+                          details:
+                            typeof item.details === "string"
+                              ? (() => {
+                                  try {
+                                    return JSON.parse(item.details);
+                                  } catch {
+                                    console.error("Failed to parse details for product:", item);
+                                    return {};
+                                  }
+                                })()
+                              : item.details,
+                        }));
+                      // Update the filtered products and oldP
+                      setFilteredProducts(filtered);
+                      setOldP(filtered);
+                      // Update "no products" message
+                      setShowNoProductsMessage(filtered.length === 0);
+                    }}
                       >
                         {subCategory.name}
                         <span className="category-count">
@@ -234,12 +229,10 @@ const handleSearchChange = () => {
           ))}
         </ul>
       </aside>
-
       {/* Main Content */}
       <main className="main-content" style={{ marginBottom:'180px' }}>
         <header className="header">
           <h1>Nos Produits</h1>
-
           {/* Search Bar */}
           <div className="search-bar">
             <input
@@ -254,7 +247,6 @@ const handleSearchChange = () => {
             </button>
           </div>
         </header>
-
         {/* Products Grid */}
         <div className="products-grid">
           {filteredProducts?.length > 0 ? (
@@ -268,7 +260,7 @@ const handleSearchChange = () => {
               >
                 <div className="product-image">
                   <img
-                    src="https://via.placeholder.com/150"
+                    src="https://supergros.ma/img/HoistingMachinery/TruckCrane/QY16D.jpg"
                     alt={product.nom_pro}
                     className="product-image"
                   />
