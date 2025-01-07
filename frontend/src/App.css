@@ -1,0 +1,17 @@
+/* Structure principale */
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Prend toute la hauteur de la fenêtre */
+}
+
+.content {
+  flex: 1; /* S'étend pour occuper l'espace entre le header et le footer */
+}
+
+/* Footer */
+.footer {
+  background-color: white;
+  padding: 2rem;
+  text-align: center;
+}

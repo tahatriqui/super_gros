@@ -1,0 +1,187 @@
+/* Styles pour l'en-tête */
+.header-section {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.header-image {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+
+.header-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.header-text h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.header-text p {
+  font-size: 1.2rem;
+  margin: 0.5rem 0;
+}
+
+.header-button {
+  background-color: #4caf50;
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.header-button:hover {
+  background-color: #45a049;
+}
+
+/* Styles pour la section des services */
+.services {
+  text-align: center;
+  padding: 2rem;
+}
+
+.services__title {
+  color: #ff5a5f;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.services__subtitle {
+  font-size: 2rem;
+  margin: 0.5rem 0;
+}
+
+.services__container {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.service-card {
+  border: 1px dashed #ddd;
+  padding: 1.5rem;
+  width: 300px;
+  text-align: center;
+  background-color: #fff;
+  border-radius: 8px;
+}
+
+.service-card__icon img {
+  width: auto;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+.service-card__title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #CC373B;
+  margin-bottom: 0.5rem;
+}
+
+.service-card__description {
+  font-size: 1rem;
+  color: #666;
+}
+/* Section Articles */
+.articles {
+  margin-top: 4rem;
+  text-align: center;
+  padding: 2rem;
+}
+
+.articles__header h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.articles__header p {
+  font-size: 1rem;
+  color: #666;
+}
+
+.articles__container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Deux articles par ligne */
+  gap: 2rem;
+  margin-top: 2rem;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .articles__container {
+    grid-template-columns: 1fr; /* Sur petits écrans, un article par ligne */
+  }
+}
+
+.article-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 100%; /* Prend toute la largeur disponible */
+}
+
+.article-card__image img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.article-card__content {
+  padding: 1rem;
+  text-align: left;
+}
+
+.article-card__category,
+.article-card__date {
+  font-size: 0.9rem;
+  color: #888;
+}
+
+.article-card__title {
+  font-size: 1.2rem;
+  margin: 0.5rem 0;
+}
+
+.article-card__description {
+  font-size: 1rem;
+  color: #666;
+}
+
+.article-card__link {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.article-card__link:hover {
+  text-decoration: underline;
+}
+
+.articles__button {
+  margin-top: 2rem;
+  padding: 0.5rem 1.5rem;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.articles__button:hover {
+  background: #0056b3;
+}
+

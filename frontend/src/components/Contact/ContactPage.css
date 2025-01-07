@@ -1,0 +1,136 @@
+
+.allContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ 
+
+  
+}
+
+.cc {
+  display: flex;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: 1000px;
+  margin-top: 8rem;
+}
+
+
+.contacct-info {
+  background-color: #e04050;
+  color: #fff;
+  padding: 30px;
+   
+  
+  width: 40%;
+}
+
+.contacct-info h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  padding-top:40px;
+  padding-bottom:20px; 
+}
+
+.contacct-info p {
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+.contact-form {
+  padding: 30px;
+  width: 60%;
+}
+
+.contact-form h2 {
+  margin-bottom: 10px;
+  font-size: 24px;
+  padding-top:40px;
+}
+
+.contact-form p {
+  margin-bottom: 20px;
+  color: #555;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.contact-form button {
+  background-color: #e04050;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.contact-form button:hover {
+  background-color: #e04050;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .cc {
+    flex-direction: column;
+    width: 90%;
+    height: auto;
+  }
+
+  .contacct-info, .contact-form {
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .contacct-info h2, .contact-form h2 {
+    font-size: 20px;
+  }
+
+  .contacct-info p, .contact-form p {
+    font-size: 14px;
+  }
+
+  .contact-form input, .contact-form textarea {
+    font-size: 12px;
+  }
+
+  .contact-form button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .contacct-info {
+    padding: 15px;
+  }
+
+  .contacct-info h2, .contact-form h2 {
+    font-size: 18px;
+  }
+
+  .contacct-info p, .contact-form p {
+    font-size: 12px;
+  }
+
+  .contact-form input, .contact-form textarea {
+    font-size: 12px;
+    padding: 8px;
+  }
+
+  .contact-form button {
+    padding: 10px;
+    font-size: 14px;
+  }
+}

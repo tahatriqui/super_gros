@@ -1,0 +1,220 @@
+.products-container {
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.products-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.products-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #333;
+}
+
+.products-description {
+  font-size: 1rem;
+  color: #777;
+}
+
+.view-all-btn {
+  background-color: #CC373B;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+
+
+.products-slider {
+  margin-top: 20px;
+}
+
+.product-card {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  min-height:360px;
+  gap: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
+}
+
+.product-card-content {
+  padding: 20px;
+  text-align: center;
+}
+
+.product-image {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+
+.product-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.product-desc {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.details-btn {
+  background-color: #CC373B;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.details-btn:hover {
+  background-color: #CC373B;
+}
+
+/* Custom Arrow Styling */
+.arrow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.6s ease;
+  z-index: 1000; /* Ensure arrows are above the slider */
+}
+
+
+.prev-arrow {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.next-arrow {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+}
+
+/* Ensure slider has proper padding and positions the arrows correctly */
+.slick-slider {
+  position: relative;
+}
+
+.slick-slide {
+  position: relative;  /* Make sure this is relative so arrows can be positioned within the slider */
+}
+
+/* Slider Dots Customization */
+.slick-dots {
+  bottom: -30px;
+}
+
+.slick-dots li button:before {
+  font-size: 12px;
+  color: #CC373B;
+}
+
+.slick-dots li.slick-active button:before {
+  color: #333;
+}
+
+/* Global styles for product cards */
+.product-card {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 .5px 1px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transform: translateY(50px); /* Start from below */
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.product-card.fade-in {
+  opacity: 1;
+  transform: translateY(0); 
+}
+
+/* Animation for product card fading in */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Apply animation to product cards */
+.product-card {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+.product-card-content {
+  padding: 20px;
+  text-align: center;
+}
+
+.product-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.product-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.product-desc {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.details-btn {
+  background-color: #CC373B;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.details-btn:hover {
+  background-color:#CC373B;
+}
+
