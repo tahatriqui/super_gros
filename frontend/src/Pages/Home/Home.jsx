@@ -6,8 +6,11 @@ import SolutionSection from "../../components/solutions/SolutionsSection.jsx";
 import ProductsPage from "../Products/ProductsPage.jsx";
 import ContactSection from "../../components/Contact/ContactSection.jsx";
 import Slideer from "./Slideer.jsx";
+import { useAppContext } from "../../AppContext";
 
 const App = () => {
+   const { setVh } = useAppContext();
+   setVh(14)
   const images = [
     "https://supergros.ma/img/XCMG%20Picture%201.jpg",
     "https://supergros.ma/img/XCMG%20Picture%201.jpg",

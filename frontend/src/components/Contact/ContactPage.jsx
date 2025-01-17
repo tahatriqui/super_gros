@@ -2,8 +2,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone, faEnvelope, faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion"; // Import motion
 import "./ContactPage.css";
+import { useAppContext } from "../../AppContext";
 
 function ContactPage() {
+  const { setVh } = useAppContext();
+   setVh(14)
   return (
     <div className="allContent">
       <div className="cc">

@@ -3,9 +3,12 @@ import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer"; // Import the intersection observer
 import "./About.css";
 import Logo from "../../assets/Transparent.png";
+import { useAppContext } from "../../AppContext";
 
 // La page À propos de
 const About = () => {
+   const { setVh } = useAppContext();
+   setVh(14)
   const allArticles = [
     {
       title: "Les grues",

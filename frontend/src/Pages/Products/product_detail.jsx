@@ -12,7 +12,8 @@ const ProductDetail = () => {
   const [showDetails, setShowDetails] = useState(false);
 
   const { did } = useParams();
-  const { filteredProducts } = useAppContext();
+  const { filteredProducts,setVh } = useAppContext();
+  setVh(14)
 
   useEffect(() => {
     const filter = filteredProducts.find((e) => e.id == did);

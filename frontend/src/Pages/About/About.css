@@ -11,9 +11,7 @@
   max-width: 1200px;
   margin: 0 auto;
   text-align: center;
-  
 }
-
 /* Partie supérieure */
 .about-header {
   margin-bottom: 60px;
@@ -46,6 +44,7 @@
   cursor: pointer;
   border-radius: 4px;
 }
+
 /* Partie inférieure */
 .about-description {
   margin-top: 40px;
@@ -148,11 +147,7 @@
   margin-bottom: 15px;
 }
 
-.article-link {
-  font-size: 14px;
-  color: #007bff;
-  text-decoration: none;
-}
+
 
 .article-link:hover {
   text-decoration: underline;
