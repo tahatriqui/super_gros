@@ -139,15 +139,31 @@ function Nav() {
     ]);
   }, [categories, scategories, sscategories]);
 
+   const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <div>
-      <header className=" text-[15px] fixed inset-0 flex-center bg-[#ffff] z-[9999]" style={{height: "6rem"}}>
+      <header className={`text-[25px] font-[600] fixed inset-0 flex-center ${isScrolled? 'bg-[#fcfcfc87]':"bg-[#ffff]"}  z-[9999]`} style={{height: "6rem"}}>
         <nav className="px-3.5 flex-center-between w-full max-w-7xl mx-auto relative z-[10000]" >
           <Link to={"/"} className="flex-center gap-x-3 z-[10020] relative ">
-            <img src={Logo}  alt="Logo" className="w-[auto] h-[190px] logo" />
+            <img src={Logo}  alt="Logo" className="w-[auto] h-[190px]  logo" />
           </Link>
-         
-
+        
           <ul className="hidden gap-x-1 lg:flex-center">
             {Menus.map((menu) => (
               <DesktopMenu menu={menu} key={menu.name} />
